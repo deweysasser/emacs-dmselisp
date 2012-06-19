@@ -1,0 +1,1012 @@
+2004-05-10  Dewey M. Sasser  <dewey@sasser.com>
+
+	* alists.el (add-to-mode-alist): added an argument so you no
+	longer have to give it a cons pair.  Set to remove duplicates
+	after addition.
+
+2002-10-23  Dewey M. Sasser  <dsasser@cerulean.com>
+
+	* cando.el (in-domain): Added macro to test computer domain
+
+Tue Nov 18 18:34:33 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* timecats.el (ptmacros): added require
+
+Thu Aug 28 23:14:02 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* ptmacros.el (in-temp-buffer): disabled setting the buffer during
+	body execution
+	(in-buffer): ditto
+	(in-temp-buffer-same-mode): ditto
+
+Tue Jul 15 11:53:12 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* Released 1.9.5
+
+	* makefile (VERSION): Updated to 1.9.5
+
+Mon Jul 14 17:51:00 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* cclass.el (cclass::collect-arg-class-symbols): changed from
+	caching arguments to caching argument class names.  The other
+	cause a stack overflow (even though it was faster).
+
+	* nvs.el (NVS-documentation-version): updated to 1.9.5
+
+	* tests/functions.el (functions-test-series): added bindings for
+	user name and email so emacs -q tests will work correctly
+	* tests/classdoc.el (class-test-series): ditto
+
+	* eltest.el (do-one-test): moved handling of :bindings from
+	individual test case to generic tests.  Now all tests (such as
+	test series) can have bindings)
+
+	* Released 1.9.4
+
+	* elisp.texi (Release 1.9.4): updated release notes
+
+	* nvs.el (auto-mode-alist): corrected entry
+
+Thu Jul 10 12:37:43 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* align-regexp.el (align-regexp): made last value the default
+	value 
+
+	* c-support.el: removed a (load-library "c-mode") that was
+	(possibly) interfering with Dave's (dave@newvision.com) C
+	indention. 
+	(update-table-of-contents): changed kill-line so that the kill
+	ring is not messed up.
+
+	* align-regexp.el: Added package to NVS elisp
+
+	* autoproto.el (autoproto-insert-protos): fixed bug which choped
+	off trailing 'f' of 2nd to last "#endif"
+
+Mon Jul 07 16:00:43 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el: ditto
+	(NVS-documentation-version): Updated to 1.9.2
+
+	* msvt.el ((featurep 'fcreate)): use fcreate-add-to-creation-alist
+
+	* fcreate.el (fcreate-add-to-creation-alist): added function to
+	add to created-file-alist
+
+Sun Jun 01 10:06:35 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* c-stuff.el (insert-header-wrapper-internal): changed to use
+	gcpmax instead of eob
+
+Fri Apr 11 22:31:05 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el ((compile)): added an eval-when compile to require
+	ptmacros. 
+
+	* ptmacros.el (in-temp-buffer):  moved macro
+	(in-temp-buffer-same-mode): ditto
+	(in-buffer): ditto
+
+Wed Mar 26 11:32:10 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* c-stuff.el (insert-header-wrapper-internal): changed to skip
+	first comment in c++ mode.
+	Removed additions to created-file-alist so that it was not doubled
+
+Sun Mar 23 19:06:26 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* header.el (fill-line-with-preceding-character): changed
+	kill-region to delete-region so the kill ring is not affected.
+
+Tue Mar 18 15:04:13 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (auto-mode-alist): added pure mode to auto-mode-alist
+
+Thu Mar 13 11:30:11 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* alists.el (prepend-to-list-unique): Added this macro and
+	append-to-list unique
+
+Wed Mar 05 11:49:12 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* eltest.el (eltest::show-error): Added variable to avoid trapping
+	(or actually, to re-signal) any errors
+
+Mon Mar 03 12:46:58 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* cclass.el (slot-value): changed to speed it up significantly at
+	the expense of encapsulation violation for cl-structures
+	(standard-object): moved defstruct out of forget-all-classes so
+	that the functions it defines (like standard-object-p) will be
+	byte compiled, etc.
+	(cclass::find-class-entry): changed caching method so that class
+	symbolsa are used instead of actual caches.  This sacrifices some
+	flexibility, but allows use of assoc to find the cache entry.
+	EMACS will probably never be able to stand the flexibility, anyway.
+	(cclass::execute-functions): moved reverse of after-methods to
+	when they're defined
+
+Wed Feb 26 14:47:25 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvscomp.el (nvs-comp-files): added spellsup.el
+
+Mon Feb 24 22:44:35 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (auto-mode-alist): added IDL mode to nvs elisp & .idl to
+	auto-mode-alist 
+	(auto-mode-alist): added instalit mode (.inf)
+
+Sun Feb 23 22:23:30 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* cclass.el (cclass::execute-method): added caching for types
+
+Fri Feb 21 13:01:14 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* cclass.el (fmakunbound): advised this function to handle cmethod
+	methods
+
+Wed Feb 19 10:37:35 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* cclass.el (initialize-instance): added this generic function
+
+	* functions.el (c-mode-real-function-find-function-by-parts):
+	changed to make member functions when appropriate
+
+	* whitesp.el (trim-whitespace): fixed so it handles "\n" correctly
+
+	* cclass.el (forget-all-classes): removed class slot from standard-object
+
+	* block-cm.el (recomment-block): fixed crash bug
+
+Tue Feb 18 13:40:48 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (display-field-documentation): changed so that it
+	completes on field names
+	(find-default-field-values): fixed bug where "*/" would remain in
+	buffer after redocumenting a c function
+
+Sun Feb 16 20:05:36 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvscomp.el (nvs-comp-files): added cclass.el to list
+
+	* cclass.el (define-crippled-method-internal): Changed preserve
+	one unique spec/mode combination
+
+Thu Feb 13 08:50:12 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* Released 1.9.2 Beta
+
+	* Added (require 'backquote) to all files that needed it.
+
+Thu Jan 16 17:52:05 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el: moved the addition of header wrapper to this file (it
+	had been disabled by the autoload).
+
+Wed Dec 11 17:14:00 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* c++-tools.el (make-c++-accessors): Added this file with this
+	function 
+
+Tue Nov 05 16:55:38 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* whitesp.el ((compile)): added eval-when to get macros out of
+	protos when compiling
+
+Wed Oct 30 14:04:34 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* alists.el (prepend-to-list): changed definitions so v 18 is no
+	longer supported.
+
+	* makefile (SRC): added mifmode to nvscomp.el compilation list and
+	SRC target 
+
+Mon Oct 14 12:04:06 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* tests/functions.el (functions-test-series): updated results with
+	correct email address which is now the default.
+
+	* put (declare (special...))  in for many variables -- eliminates
+	compilation warnings
+
+	* faceedit.el ((compile)): added eval-when to require macro used
+	in this file
+
+	* c-boxes.el: eliminated the historical (taarna-mode).
+
+	* alists.el: put declaim spec to eliminate warning
+
+Fri Oct 11 10:03:38 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvscomp.el (nvs-comp-files): added multi-mode.el to compilation
+	list 
+
+	* fcreate.el ((string-in-list created-file-version-list (substring
+	emacs-version 0 5))): changed sleep to 1 second
+
+	* nvscomp.el (nvs-comp-files): added align-eq to compilation list
+
+	* makefile (SRC): added align-eq to src list
+
+	* Released 1.9.1
+
+	* makefile (SHELL): removed os/2 specific definition
+	(SRC): added classdoc.el to list
+
+	* tests/classdoc.el (class-test-series): Added basic class tests
+
+	* nvscomp.el (nvs-comp-files): Added classdoc to the compilation
+	list. 
+
+	* Released 1.9.0
+
+	* makefile (TESTS): added testfunc.el to this release target
+
+	* nvscomp.el (compile-nvs): changed to set
+	byte-compile-dynamic-docstrings to nil before compilation to
+	ensure the .elcs work with emacs < 19.28
+
+	* makefile (line-conv): added this target to convert OS/2 to UNIX
+	line endings
+
+	* nvs.el (NVS-documentation-version): changed version # in nvs.el
+	to 1.9.0 (class doc makes this a "new feature" release)
+
+Thu Oct 10 16:55:50 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (modefn): put require of this file first
+
+	* nvscomp.el (nvs-comp-files): added msvt to compile file list
+
+	* makefile (SRC): Added msvt.el to source file list
+	(compile): put this target in makefile
+
+Sat Sep 21 10:07:26 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el: Removed binding for C-xC-a from nvs.el.  It shouldn't
+	have been there in the first place.
+	removed autoloads
+	(auto-mode-alist): added ".mst" files as ms-visual-test-mode.
+
+Fri Sep 20 11:33:18 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (document-c-function): changed so it can handle
+	failure to find the function
+	(find-function-by-parts): allow white space between function name
+	and '(' character
+
+	* c-support.el (get-next-function-description): added this
+	function specialized for ms-visual-test-mode to snarf scenarios,
+	too. 
+
+	* header.el (user-full-name-and-email): changed to use variable
+	user-mail-address for email address
+
+	* msvt.el (msvt-word-at-point): Added this function to do the same
+	things as word-at-point, but return result minus text properties.
+	(msvt-keywords): added some key words
+
+Wed Sep 18 12:15:23 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* modefn.el (modefn::get-function-documentation): changed function
+	to use (documentation) to get the function's documentation
+	(modefn::function-no-docs): Redefined function to return it's
+	argument on everything but lists.  Modefn now works for subrs
+
+Tue Sep 17 12:51:39 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (inhibit-email-address): removed default of 't because
+	NVS now has email
+
+	* functions.el (find-function-by-parts): ms-visual-test-mode
+	version returned (nil) when there were no args, rather than nil.
+	Rewrote using loop macro
+	(find-function-by-parts): ms-visual-test-mode: changed so "sub"
+	functions do not indicate a return value
+	(skip-comment): added this function, default mode
+
+Sat Sep 14 00:42:07 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* changed functions test to include the "FORMAT VERSION" field in
+	the result.
+
+	* functions.el (find-next-perl-arg): modified regexp to match perl
+	arguments
+	(function-staticp): changed function so that if the function has
+	no return type, will return nil.  This allows it to work on macros
+	(c-mode-macro-find-function-by-parts): added this function, made
+	document-function work for macros in c/c++ modes
+
+Fri Sep 13 16:07:03 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (find-function-by-parts): added ms-visual-test-mode
+	specialization to this method
+	(argument): added this structure.  Need to convert all
+	documentation methods to use it.
+	(list-perl-function-args): changed all instances of
+	buffer-substring to buffer-substring-no-properties.  The
+	properties were interfering with string matches, etc.
+
+	* fcreate.el (fcreate-match-and-call): changed so that it will
+	handle matching against modes as well
+
+Tue Aug 27 14:01:23 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* fcreate.el (just-created-filep): fixed unbound variable 'error'
+	problem. 
+
+Wed Aug 14 17:08:04 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (microsoft-error-regexp):  added '*' (see below)
+
+	* header.el (header-status-string): added '*' (see below)
+
+	* fcreate.el (created-file-hooks): added '*' (see below)
+
+	* c-support.el (header-insert-arguments): added '*' (see below)
+
+	* c-stuff.el (header-copyright-notice): added '*' as in autoproto
+
+	* autoproto.el (autoproto-here): Added '*' to beginning of
+	documentation for all public variables so that emacs recognizes
+	them as user visible variables
+
+Tue Jul 02 10:11:13 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* modefn.el (modefn::define-generic-function): changed so that
+	generic function is byte compiled before installation
+	(bytecomp): Added (require 'bytecomp)
+
+	* c-support.el: Removed get-next-function-description, put it back
+	as mode specific function
+	(default get-next-function-description): changed regular
+	expression so that it matches class documentation as well
+
+Fri Jun 28 12:48:03 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* classdoc.el: added this file with a first pass on class
+	documentation.
+
+Sat Jun 01 16:12:07 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* c-stuff.el (insert-ID-String-internal): added this function
+
+Fri Apr 19 14:11:12 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (default-documentation-alist): added the "FORMAT
+	VERSION" field.  Also added to documentation-order-list and
+	c++-documentation-order-list.
+
+	* alists.el: Removed "foo" as filename in autoloads (what was that
+	doing there?)
+
+Mon Mar 25 11:36:26 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el: correct microsoft-error-regexp for CL error messages 
+
+Mon Mar 18 14:25:12 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* date.el (lookup-month): hacked around problem with byte
+	compilation.
+
+	* nvscomp.el (nvs-comp-files): removed nvscomp from the
+	compilation.
+
+	* complex.el (count-statements): fixed bug where parts of words
+	were matched
+
+Sun Mar 17 23:44:16 1996    <dewey@aerosmith.newvision.com>
+        * Released 1.8.5
+	
+	* functions.el: moved in-temp-buffer macro definition to top of
+	file 
+
+Sun Mar 17 23:22:00 1996  Dewey M. Sasser  <dewey@aerosmith.newvision.com>
+
+	* nvscomp.el (compile-file-if-necessary): changed so function
+	loads library.  This takes care of macros being defined before
+	they're used, but I really should put in the appropriate requires
+	in the right places.
+
+Sun Mar 17 22:54:51 1996    <dewey@aerosmith.newvision.com>
+
+	* nvs-menu.el ((string-lessp emacs-version "19.30")): make sure
+	c++-mode is loaded so that we can define c++-mode-map.
+
+Sun Mar 17 22:37:36 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* nvs.el (NVS-documentation-version): change version number to
+	1.8.5 in preparation for release.
+
+Fri Mar 15 12:52:55 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* testfunc.el: Wrote several new functions so that we can perform
+	global regression test and display results from them.  Started on
+	displaying results in an easy to use manner.
+	(princ-test-case-results): Added way for function to print
+	differences and results in outline format
+
+Thu Mar 14 09:50:24 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (get-function-return-type-string): fixed crashing
+	bug when previous field had a newline immediately after the '--'.
+	Note that something still breaks the insert of multiple line
+	values (though possibly not here)
+
+	* protos.el (argument-get-name): changed to return no name when
+	encountering "..."
+
+Tue Mar 12 12:58:44 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* block-cm.el (fill-line-with-spaces): fixed problem where
+	inserted too many newlines at end of region on C-u argument.
+
+	* header.el (fill-line-with-preceding-character): modified so that
+	it will delete any whitespace between the point and the preceeding
+	non-whitespace character.  Formerly it left the whitespace in
+	place to clutter up the buffer.
+
+	* functions.el (find-default-field-values): modified function to
+	no longer delete first of next line (which was compensating for
+	problem with fill-line-with-preceding-character, anyway
+
+	* testfunc.el (buffer-modifying-test-case):  added test type to
+	handle buffer modifying functions
+
+Fri Mar 08 14:50:49 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (default-documentation-alist): Added a "SEE ALSO"
+	field to the function header
+
+	* whitesp.el: added this file, move whitespace functions into it. 
+
+	* nvs-auto.el: Added autoloads for whitesp.el
+
+	* block-cm.el (make-block-region): modified to take a "depth of
+	block" argument
+	(block-comment-region): modified to take a prefix arg which is
+	level of block
+	(block-comment-line):  modified to take a prefix arg which is
+	level of block
+	(block-comment-region): converted to take start and end and use
+	region as interactive arg
+	(block-comment-line): now uses markers instead of manipulating the
+	mark (shouldn't have in the first place).
+	(block-comment-line): Takes a prefix arg for depth, puts that many
+	spaces between letters, fills and block-comments to that depth.
+
+Thu Mar 07 15:08:48 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* block-cm.el (block-comment-region): Fixed bug where right side
+	would not line up correctly
+
+	* functions.el (header-prefix-string): made this an autoloaded
+	function 
+
+	* nvs.el: activate menu bar when window-system is bound
+
+	* nvs-menu.el: Added NVS commands to menu bar
+
+Wed Mar 06 13:48:00 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (get-function-return-type-string): fixed bug which
+	incorrectly cause void return type in c++-mode for "int" return
+	types, but only on the first documentation run.
+
+	* c-support.el (find-all-return-statements): changed function to
+	use comment-start and comment-end, rather than assuming c-mode.
+	It still assumes C syntax.
+
+	* nvs.el: Changed so that it autoloads functions rather than
+	requiring files.  This will hopefully make startup much faster. 
+
+Mon Mar 04 16:19:40 1996  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (help-for-field): Added help for field
+	documentation.  Users can now use the command "help-for-field" to
+	get documentation about a specific field, including what should go
+	into it.
+
+Fri Feb 23 10:50:30 1996  Dewey M. Sasser  <dewey@aerosmith.newvision.com>
+
+	* alists.el: changed to do a better prepend-to-path and
+	append-to-path in the case of emacs 19 (has backquote).  This
+	should be manually expanded for emacs 18 as well
+
+Thu Feb 22 09:32:36 1996  Dewey M. Sasser  <dewey@aerosmith.newvision.com>
+
+	* c-support.el ("c-mode"): loads c-mode before manipulating the map
+
+Tue Feb 20 09:34:37 1996  Dewey M. Sasser  <dewey@aerosmith.newvision.com>
+
+	* block-cm.el (block-comment-region): fixed bug where right side
+	of comments would not align
+
+	* functions.el (trim-all-whitespace): handle case where string is
+	"".
+
+Fri Dec 29 10:46:05 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* header.el (header-rcs): fixed bug that interfered with
+	compilation of this file
+
+Fri Nov 24 15:40:17 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* functions.el (list-perl-function-args): Changed significantly to
+	locate lists, as well as multiple values in a list.
+
+Fri Nov 17 15:03:45 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* Released 1.8.4
+
+Wed Nov 01 16:03:03 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* header.el: removed RCS keyword Log from headers.  I've finally
+	been convinced that this is at best useless, at worst problem
+	causing. 
+
+Tue Oct 24 10:26:52 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* c-support.el (get-next-function-description): fixed bug reported
+	by rhb where TOC update was very sensitve to spaces
+
+Mon Oct 23 14:18:24 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* modefn.el (defmodemethod): changed so byte-compilation works on
+	body 
+	(define-generic-function): changed function to intern symbols
+	before definition
+
+	* nvscomp.el: removed specialization for emacs 18.  Emacs 18 is no
+	longer supported because of the reliance on package cl.
+
+Sun Oct 22 00:55:56 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* modefn.el (defmodealias-internal): changed so defmodealias will
+	return name of last defined function
+	(define-generic-function-conditional): changed to return name of
+	defined function
+
+	* functions.el (make-retval-alist-internal): created this function
+	parameterized on token
+	(in-buffer): fixed bug where macro did not delete temp buffer
+	after completion (this might have caused slowdown probs in
+	fdc-docify-buffer) 
+
+Sat Oct 21 15:48:01 1995  Dewey M. Sasser  <dewey@newvision.com>
+
+	* modefn.el (defmodealias-internal): changed so it will add
+	wrapper function if as would defining a new one directly
+	(defmodemethod): changed order or first two args so things like
+	changelog mode can find appropriate names
+	(defmodegeneric): changed to call
+	define-generic-function-conditional 
+
+	* functions.el (find-function-by-parts): updated function to use
+	modemethods, changed to remove white space from return type before
+	storing so that matching "void" works correctly.
+
+	* modefn.el (define-new-function): changed call to documentation
+	so that it does not substitute key bindings (this only works in
+	emacs 19)
+
+	* functions.el (document-function): added this function.  This
+	should be used in the future rather than document-c-function.
+
+	* modefn.el (defmodemethod): made significant changes to this
+	macro, improving the whole idea of mode methods.  Added default
+	methods, and if you define a mode method where a regular function
+	existed before, the regular definition will become the default
+	method. 
+	(define-generic-function): removed old ref to hash table to longer
+	used 
+	(define-new-function): fixed bug which would zap initial
+	definition of default function
+	(define-new-function): I'm sure a bug lurks here somewhere in the
+	handling of documentation strings and functions which simply
+	return a string
+	(define-mode-specific-function): changed function to return new
+	symbol as does defun
+	(define-new-function): changed to call
+	define-mode-specific-function last so it can return newly defined
+	symbol.
+	(define-new-function): changed to get documentation properly
+	(i.e. handle byte-code functions)
+	(function-no-docs): now does not process byte-code functions
+
+Mon Jul 10 17:22:59 1995  Dewey M. Sasser  <dewey@jenna.newvision.com>
+
+	* functions.el (find-existing-value): Fixed bug that did not
+	correctly find boundaries of fields when those fields contain
+	blank lines.  (Reported by Lubars).
+
+Wed Jun 21 10:32:16 1995  Dewey M. Sasser  <dewey@jenna.newvision.com>
+
+	* fundoc.el (fdc-include-function): started a method to filter the
+	documentation on basis of visibility
+
+	* functions.el (new-find-c-function-by-parts): added to regexp to
+	handle pointer and reference return types.
+	(get-function-visibility): added update function for visibility.
+	It automatically sets visibility to PRIVATE if the function is
+	static. 
+
+Fri Jun 09 14:59:20 1995  Dewey M. Sasser  <dewey@jenna.newvision.com>
+        * makefile:  1.8.2 BETA release
+	* functions.el (new-find-c-function-by-parts): fixed bug which
+	allowed only one token in return type.
+	(get-function-return-type-string): adjust so it removes excessive
+	whitespace.
+
+Tue Jun 06 22:35:34 1995  Dewey M. Sasser  <dewey@jenna.newvision.com>
+
+        * functions.el (get-function-return-type-string): fixed problem
+	that would prevent functions with no return type (c++
+	constructors) from being updated correctly.
+	(find-default-field-values): added count of return values to
+	determine if actual header was found.  This fixes a bug where the
+	file header was deleted documenting the first function.
+	(find-existing-value): Added 't as return value for successful
+	cases.  Also part of same fix.
+
+Tue Jun 06 12:23:56 1995  Dewey M. Sasser  <dewey@jenna.newvision.com>
+
+	* functions.el (new-find-c-function-by-parts): fixed the probem
+	that would screw up args when return value was on a different
+	line. 
+	(document-c-function): if given a prefix arg, will not delete old
+	documentation header.
+
+Thu Aug 04 15:49:11 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* nvs.el : protect the file against adding make-header to
+	created-file-alist multiple times.  It shouldn't have happend
+	before using just (require 'nvs), but this now protects against an
+	explicit (load-library "nvs").
+
+Mon Jul 18 14:04:12 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* autoproto.el (autoproto-insert-protos): changed function so that
+	it inserts a new set of prototypes _before_ the final #endif of
+	the file, so long as that #endif has nvs standard syntax:  "#endif
+	/*  FILENAME_H  */"
+
+Sun Jun 26 03:18:18 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* c-support.el (document-c-function): if c-mode, c++-mode and the
+	user hasn't set the override variable, calls a function which puts
+	function arguements into the template, along with type.
+
+	* autoproto.el (skip-characters-backward): put in optional limit
+	on how far back to go.
+
+	(find-next-c-function): Placed a limit of point when function is
+	called on how far back to search.  This may be a problem, I don't
+	know yet.
+
+	* protos.el (function-get-name): added this function for
+	completeness.
+
+	(function-get-return-type): added accessor function
+
+	(insert-function-arguements): added return type insertion.  This
+	is smart enough to handle "void" return types.
+
+Sat Jun 25 15:39:25 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* c-stuff.el (c-mode-insert-copyright): minor improvement --
+	increse end as we insert characters.
+
+Fri Jun 24 18:04:55 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* makedocs.el (find-next-elisp-def): made the interactive an
+	optional find, with allows us to find macros and non interactive
+	functions. 
+
+Tue May 03 07:40:44 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* header.el (include-copyright-notice): added a bit of copyright
+	stuff and customized the old stuff to my preferences.  You can now
+	independantly set the copyright notice and enable/disable it.
+
+Wed Apr 27 11:30:18 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* header.el (user-full-name-and-email): return only 
+	user-full-name. Put this back when we get on the internet
+
+Sun Mar 27 21:06:31 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* c-stuff.el (h-file-wrapper): call this in c-mode, if it's a .h
+	file puts a wrapper around it.)
+
+	* header.el (header-file-name): changed the name to pick out the
+	file name instead of using the buffer name.
+
+Wed Feb 23 09:46:37 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* autoproto.el (fixup-all-whitespace): made it no longer interactive
+
+Tue Feb 22 17:57:32 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* block-cm.el (block-comment-line): added this function.
+
+Mon Feb 21 12:37:20 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* autoproto.el (autoproto-format-prototype): change
+	execute-key-sequence to indent-for-tab-command when formating
+	prototypes.
+
+Sun Oct 31 09:18:53 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* c-suppor.el (next-c-function-name): now finds elisp function
+	(defuns) correctly.
+
+	(get-next-function-description): comment-out the elisp specific
+	search.  I want it to only pick out the functions with the
+	standard fnc header.
+
+	* header.el (header-author-string): inserted for author if non nil.
+
+Sat Oct 30 23:01:32 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (header-rcs): fix newline problem
+
+Fri Oct 29 01:24:06 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* c-suppor.el (c++-to-c-comments-buffer): added this
+	function--only in c-mode.
+
+	* header.el (header-status): changed so that the default value is
+	$State: Exp $, so it's more compatible with RCS.
+
+	* block-cm.el (block-comment-region): changed header and footer to
+	call make-divisor, with a hack to adjust length
+
+	(uncomment-region): make this function generaly aplicable
+
+	(block-comment-end-string): changed this to take advantage of
+	nifty new function.
+
+	(remove-ws-from-string): nifty new function.
+
+	(block-comment-region): use the return of this function as the
+	end-comment.  More symetric for lisp mode.
+
+	(block-comment-end-string): function to match the ending comment
+	with the beginning comment marks.
+
+	(block-comment-begin-string): hack to use ";;;" as comment marks
+	in emacs-lisp-mode
+
+	(comment-fill-character): Picks out a good character to use as
+	filler in your comment lines.
+
+	(block-comment-region): COMPLETELY! reworked this function to be
+	mode independant.  It used to be only for c-mode.  BTW, renamed
+	comment-region to this function name, becuase I already had a
+	comment-region, and this name is more descriptive.
+
+	* header.el (user-full-name-and-email): wrote this
+	function--useful.
+
+	(update-last-modifier): Same thing again.
+
+	(make-revision): same as header-author
+
+	(header-author): now uses full name and email.
+
+Thu Oct 28 14:52:43 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (make-divisor): changed to use
+	fill-line-with-preceding-character and make a solid header.
+
+	(header-status-string): defvar'd it.  Why don't I just define it
+	to "Experimental"???
+
+	(header-status): insert header-status-string if there is one.
+
+Wed Oct 27 03:04:59 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (current-line): added this function
+
+	* c-suppor.el (get-next-function-description): now looks for a
+	header-prefix-string instead of a beginning of comment when
+	looking for a fn desc.
+
+	* header.el (widen-update-toc): problem with update toc fixed by
+	first widening, then running update toc.
+
+	* c-suppor.el (update-table-of-contents): no longer an error if
+	toc doesn't exist (the header package did some strange things
+	sometimes) 
+
+	(update-function-synopsis): add blank line after the function
+	synopsis 
+
+	(header-goto-table-of-contents): no longer an error if table of
+	contents does not exist.
+
+	* header.el (make-header-hooks): added blanks around the TOC 
+
+	(where-beginning-of-line): return location of the beginning of the
+	line 
+
+	(header-beginning): comments are now boxed in.
+
+	(fill-line-with-preceding-character): general function to fill a
+	line with any character.  This will probably one day move to
+	another file.
+
+	* rcs-cks.el (make-rcs-name): changed make-rcs-name so that it
+	doesn't add ",v"
+
+	* header.el (header-status): changed default status string to
+	"Experimental"--1 line so it can be easily deleted.
+
+	* c-suppor.el: commented out lines containing help-character
+	comment out require c++-mode
+
+	(insert-box): move-to-column-force to move-to-column
+	This package needs some work
+
+Wed Oct 27 01:15:24 1993  dewey  (dewey@dosmachine)
+
+	* header.el (make-header-hooks): renamed headers.el to header.el,
+	moved the rcs code to the end (right before table of contents)
+
+Wed Oct 27 00:57:20 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* headers.el: rearanged the file so it compiles.
+	(make-header-hooks): added 'header-beginning and 'header-ending to
+	insert begin and end comments.
+
+	(progn): moved this section to bottom so that
+	register-file-header-action will be defined when it is called.
+
+	(command-line-hooks): put a blank definition before the add line
+	so that it already existed when we went to add something.
+
+Wed Feb 23 09:46:37 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* autoproto.el (fixup-all-whitespace): made it no longer interactive
+
+Tue Feb 22 17:57:32 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* block-cm.el (block-comment-line): added this function.
+
+Mon Feb 21 12:37:20 1994  Dewey M. Sasser  (dewey@jenna.blake7.nvs.com)
+
+	* autoproto.el (autoproto-format-prototype): change
+	execute-key-sequence to indent-for-tab-command when formating
+	prototypes.
+
+Sun Oct 31 09:18:53 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* c-suppor.el (next-c-function-name): now finds elisp function
+	(defuns) correctly.
+
+	(get-next-function-description): comment-out the elisp specific
+	search.  I want it to only pick out the functions with the
+	standard fnc header.
+
+	* header.el (header-author-string): inserted for author if non nil.
+
+Sat Oct 30 23:01:32 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (header-rcs): fix newline problem
+
+Fri Oct 29 01:24:06 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* c-suppor.el (c++-to-c-comments-buffer): added this
+	function--only in c-mode.
+
+	* header.el (header-status): changed so that the default value is
+	$State: Exp $, so it's more compatible with RCS.
+
+	* block-cm.el (block-comment-region): changed header and footer to
+	call make-divisor, with a hack to adjust length
+
+	(uncomment-region): make this function generaly aplicable
+
+	(block-comment-end-string): changed this to take advantage of
+	nifty new function.
+
+	(remove-ws-from-string): nifty new function.
+
+	(block-comment-region): use the return of this function as the
+	end-comment.  More symetric for lisp mode.
+
+	(block-comment-end-string): function to match the ending comment
+	with the beginning comment marks.
+
+	(block-comment-begin-string): hack to use ";;;" as comment marks
+	in emacs-lisp-mode
+
+	(comment-fill-character): Picks out a good character to use as
+	filler in your comment lines.
+
+	(block-comment-region): COMPLETELY! reworked this function to be
+	mode independant.  It used to be only for c-mode.  BTW, renamed
+	comment-region to this function name, becuase I already had a
+	comment-region, and this name is more descriptive.
+
+	* header.el (user-full-name-and-email): wrote this
+	function--useful.
+
+	(update-last-modifier): Same thing again.
+
+	(make-revision): same as header-author
+
+	(header-author): now uses full name and email.
+
+Thu Oct 28 14:52:43 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (make-divisor): changed to use
+	fill-line-with-preceding-character and make a solid header.
+
+	(header-status-string): defvar'd it.  Why don't I just define it
+	to "Experimental"???
+
+	(header-status): insert header-status-string if there is one.
+
+Wed Oct 27 03:04:59 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* header.el (current-line): added this function
+
+	* c-suppor.el (get-next-function-description): now looks for a
+	header-prefix-string instead of a beginning of comment when
+	looking for a fn desc.
+
+	* header.el (widen-update-toc): problem with update toc fixed by
+	first widening, then running update toc.
+
+	* c-suppor.el (update-table-of-contents): no longer an error if
+	toc doesn't exist (the header package did some strange things
+	sometimes) 
+
+	(update-function-synopsis): add blank line after the function
+	synopsis 
+
+	(header-goto-table-of-contents): no longer an error if table of
+	contents does not exist.
+
+	* header.el (make-header-hooks): added blanks around the TOC 
+
+	(where-beginning-of-line): return location of the beginning of the
+	line 
+
+	(header-beginning): comments are now boxed in.
+
+	(fill-line-with-preceding-character): general function to fill a
+	line with any character.  This will probably one day move to
+	another file.
+
+	* rcs-cks.el (make-rcs-name): changed make-rcs-name so that it
+	doesn't add ",v"
+
+	* header.el (header-status): changed default status string to
+	"Experimental"--1 line so it can be easily deleted.
+
+	* c-suppor.el: commented out lines containing help-character
+	comment out require c++-mode
+
+	(insert-box): move-to-column-force to move-to-column
+	This package needs some work
+
+Wed Oct 27 01:15:24 1993  dewey  (dewey@dosmachine)
+
+	* header.el (make-header-hooks): renamed headers.el to header.el,
+	moved the rcs code to the end (right before table of contents)
+
+Wed Oct 27 00:57:20 1993  Dewey M. Sasser  (dewey@athena.mit.edu)
+
+	* headers.el: rearanged the file so it compiles.
+	(make-header-hooks): added 'header-beginning and 'header-ending to
+	insert begin and end comments.
+
+	(progn): moved this section to bottom so that
+	register-file-header-action will be defined when it is called.
+
+	(command-line-hooks): put a blank definition before the add line
+	so that it already existed when we went to add something.
+

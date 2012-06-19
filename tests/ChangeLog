@@ -1,0 +1,4 @@
+Thu Aug 28 23:17:59 1997  Dewey M. Sasser  <dewey@newvision.com>
+
+	* doall.el: modified to point to the correct srcdir
+

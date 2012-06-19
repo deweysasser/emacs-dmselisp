@@ -1,0 +1,32 @@
+/*********************************************************************
+ * SetHierAttr() -- set hiearchy attribute in list entry dataXXXPOINTXXX
+ * AUTHOR:    Ken Cherenichenko
+ * VISIBILITY:    PROTECTED
+ * SYNOPSIS
+ *   
+ *   BOOL CHierListBox::SetHierAttr (DWORD nAttr,
+ *   				INT nIndex ,
+ *   				BOOL fTurnOn)
+ *   
+ * DESCRIPTION
+ *   |>Description of function<|
+ * ARGUMENTS
+ *   nAttr (DWORD) -- which attribute to set
+ *   nIndex (INT) -- which entry to set
+ *   fTurnOn (BOOL) -- value for that attribute (default is TRUE)
+ * RETURNS
+ *   (BOOL) -- 
+ *          TRUE - success
+ *          FALSE - invalid index
+ * NOTES
+ *   |><|
+ * SEE ALSO
+ *   |><|
+ * CAVEATS AND BUGS
+ *   |><|
+ * FORMAT VERSION:    0.0
+ */
+
+BOOL CHierListBox::SetHierAttr (DWORD nAttr,
+				INT nIndex /*LB_ERR-5*/,
+				BOOL fTurnOn/*TRUE*/)

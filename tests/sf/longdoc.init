@@ -1,0 +1,67 @@
+#define foo (x,y)
+
+
+/*********************************************************************
+ * SetHierAttr() -- This is a function that...
+ * AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+ * VISIBILITY:    PUBLIC | PRIVATE
+ * SYNOPSIS
+ * DESCRIPTION
+ *   This is a description of the function This is a description of
+ *   the function This is a description of the function This is a
+ *   description of the function This is a description of the function
+ *
+ *   This is a description of the function This is a description of
+ *   the function This is a description of the function This is a
+ *   description of the function  
+ * ARGUMENTS
+ *   nAttr (DWORD) -- nAttr arg and I'm doing blah, blah and I really
+ *   want to do whatever so I'm blah blah
+ *   
+ *   this is another paragraph this is another paragraph this is
+ *   another paragraph this is another paragraph this is another
+ *   paragraph this is another paragraph this is another paragraph
+ *   this is another paragraph  
+ *
+ *   nIndex (INT) -- nIndex argand I'm doing blah, blah and I really
+ *   want to do whatever so I'm blah blah
+ *
+ *   fTurnOn (BOOL) -- fTurnOn argand I'm doing blah, blah and I really
+ *   want to do whatever so I'm blah blah
+ * RETURNS
+ *   (BOOL) -- it returns a blah it returns a blah it returns a blah
+ *   it returns a blah it returns a blah it returns a blah it returns
+ *
+ *   a blah it returns a blah it returns a blah it returns a blah it
+ *   returns a blah  
+ * NOTES
+ *   Some notes to preserve that i'm saying blah, blah blah blah blah
+ *   blah blah blah blah blah blah blah blah blah blah blah blah blah
+ *   blah 
+ *
+ *   with multiple paragraphs blah blah blah blah blah blah blah blah
+ *   blah blah blah blah blahblah blah blah blah blah blah blah blah
+ *   blah blah blah blah blah 
+ * SEE ALSO
+ *   A bunch of cross referencesA bunch of cross referencesA bunch of
+ *   cross referencesA bunch of cross referencesA bunch of cross
+ *
+ *   referencesA bunch of cross referencesA bunch of cross referencesA
+ *   bunch of cross referencesA bunch of cross references 
+ * CAVEATS AND BUGS
+ *   And some caveats And some caveats And some caveats And some
+ *   caveats And some caveats And some caveats And some caveats And
+ *
+ *   some caveats And some caveats And some caveats And some caveats
+ *   And some caveats And some caveats  
+ * FORMAT VERSION:    0.0
+ */
+XXXPOINTXXX
+BOOL SetHierAttr (DWORD nAttr,
+				INT nIndex /*=LB_ERR-5*/,
+				BOOL fTurnOn/*=TRUE*/)
+
+
+x += y;
+
+BOOL fTurnOn/*=TRUE*/)

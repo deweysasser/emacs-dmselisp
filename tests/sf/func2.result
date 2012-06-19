@@ -1,0 +1,26 @@
+
+
+/*********************************************************************
+ * printf() -- XXXPOINTXXX
+ * AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+ * VISIBILITY:    PUBLIC | PRIVATE
+ * SYNOPSIS
+ * DESCRIPTION
+ *   |>Description of function<|
+ * ARGUMENTS
+ *   fmt (const char *) --
+ *   (variable arguments) --
+ * RETURNS
+ *   (int) -- 
+ * NOTES
+ *   |><|
+ * SEE ALSO
+ *   |><|
+ * CAVEATS AND BUGS
+ *   |><|
+ * FORMAT VERSION:    0.0
+ */
+
+int printf(const char *fmt, ...)
+{
+}

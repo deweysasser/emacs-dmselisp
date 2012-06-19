@@ -1,0 +1,24 @@
+//////////////////////////////////////////////////////////////////////
+// operator [] -- XXXPOINTXXX
+// CLASS:    CIDParser
+// AUTHOR:    Dewey M. Sasser
+// VISIBILITY:    PUBLIC | PRIVATE
+// SYNOPSIS
+// DESCRIPTION
+//   |>Description of function<|
+// ARGUMENTS
+//   nIndex (int) --
+// RETURNS
+//   (CString) -- 
+// EXCEPTIONS:    NONE
+// NOTES
+//   |><|
+// SEE ALSO
+//   |><|
+// CAVEATS AND BUGS
+//   |><|
+// FORMAT VERSION:    0.0
+
+CString &CIDParser::operator [](int nIndex)
+{
+}

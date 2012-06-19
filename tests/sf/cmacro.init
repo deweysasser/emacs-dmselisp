@@ -1,0 +1,2 @@
+XXXPOINTXXX
+#define foo(x,y) (x<y?x:y)

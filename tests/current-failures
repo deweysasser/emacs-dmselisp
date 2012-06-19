@@ -1,0 +1,243 @@
+- Series: Top Level Series (Top):
+  - Series: Tests of OS/2 patches (os2patch-test-series):
+    - multiple: file-name-directory test (os2patch-test-series-fnd):
+      - Test 3: failed
+        - Ran:      (file-name-directory "foo")
+        - Expected: nil
+        - Resulted: ""
+      - Test 4: failed
+        - Ran:      (file-name-directory "g:foo")
+        - Expected: "g:/"
+        - Resulted: "g:"
+    
+    - multiple: file-name-nondirectory test (os2patch-test-series-fnnd):
+      - Test 2: failed
+        - Ran:      (file-name-nondirectory "foo/")
+        - Expected: ""
+        - Resulted: nil
+    
+  - Series: Functions.el test series (functions-test-series):
+    - multiple: Updating of synopsis (update-of-synopsis):
+      - Test 1: failed
+        - Ran:      (update-function-synopsis)
+        - Expected:
+          //////////////////////////////////////////////////////////////////////
+          // AddNode() -- Add a node to the list box
+          // CLASS:    CHierListBox
+          // AUTHOR:    Ken Cherenichenko
+          // VISIBILITY:     PROTECTED
+          // SYNOPSIS
+          //   
+          //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          //   			    BOOL fFind/*FALSE*/)
+          //   
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   sTypeOffset (SHORT) --
+          //   nIndex (INT) -- index of where to add the node
+          // RETURNS
+          //   (BOOL) --
+          //          TRUE - success
+          //          FALSE - invalid index
+          // NOTES
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          
+          BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          			    BOOL fFind/*FALSE*/)
+          {
+        
+        - Resulted:
+          //////////////////////////////////////////////////////////////////////
+          // AddNode() -- Add a node to the list box
+          // CLASS:    CHierListBox
+          // AUTHOR:    Ken Cherenichenko
+          // VISIBILITY:    PROTECTED
+          // SYNOPSIS
+          //   
+          //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          //   			    BOOL fFind/*FALSE*/)
+          //   
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   sTypeOffset (SHORT) --
+          //   nIndex (INT) -- index of where to add the node
+          //   fFind ( BOOL) --
+          // RETURNS
+          //   (BOOL) -- 
+          //          TRUE - success
+          //          FALSE - invalid index
+          // EXCEPTIONS:    NONE
+          // NOTES
+          //   |><|
+          // SEE ALSO
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          
+          BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          			    BOOL fFind/*FALSE*/)
+          {
+        
+        - Differences:
+          5c5
+          < // VISIBILITY:     PROTECTED
+          ---
+          > // VISIBILITY:    PROTECTED
+          15a16
+          > //   fFind ( BOOL) --
+          17c18
+          < //   (BOOL) --
+          ---
+          > //   (BOOL) -- 
+          19a21
+          > // EXCEPTIONS:    NONE
+          20a23,24
+          > //   |><|
+          > // SEE ALSO
+        
+      - Test 2: failed
+        - Ran:      (update-function-synopsis)
+        - Expected:
+          //////////////////////////////////////////////////////////////////////
+          // AddNode() -- Add a node to the list box
+          // CLASS:    CHierListBox
+          // AUTHOR:    Ken Cherenichenko
+          // VISIBILITY:     PROTECTED
+          // SYNOPSIS
+          //   
+          //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          //   			    BOOL fFind/*FALSE*/)
+          //   
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   sTypeOffset (SHORT) --
+          //   nIndex (INT) -- index of where to add the node
+          // RETURNS
+          //   (BOOL) --
+          //          TRUE - success
+          //          FALSE - invalid index
+          // NOTES
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          
+          BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          			    BOOL fFind/*FALSE*/)
+          {
+        
+        - Resulted:
+          //////////////////////////////////////////////////////////////////////
+          // AddNode() -- Add a node to the list box
+          // CLASS:    CHierListBox
+          // AUTHOR:    Ken Cherenichenko
+          // VISIBILITY:     PROTECTED
+          // SYNOPSIS
+          //   
+          //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          //   			    BOOL fFind/*FALSE*/)
+          //   
+          //
+          //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/, BOOL fFind/*FALSE*/)
+          //
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   sTypeOffset (SHORT) --
+          //   nIndex (INT) -- index of where to add the node
+          // RETURNS
+          //   (BOOL) --
+          //          TRUE - success
+          //          FALSE - invalid index
+          // NOTES
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          
+          BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+          			    BOOL fFind/*FALSE*/)
+          {
+        
+        - Differences:
+          10a11,13
+          > //
+          > //   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/, BOOL fFind/*FALSE*/)
+          > //
+        
+    
+    - multiple: Operator documentation tests (operator-documentation-tests):
+      - Test 1: failed
+        - Ran:      (document-function nil)
+        - Expected:
+          //////////////////////////////////////////////////////////////////////
+          // operator [] -- XXXPOINTXXX
+          // CLASS:    CIDParser
+          // AUTHOR:    Dewey M. Sasser
+          // VISIBILITY:    PUBLIC | PRIVATE
+          // SYNOPSIS
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   nIndex (int) --
+          // RETURNS
+          //   (CString) -- 
+          // EXCEPTIONS:    NONE
+          // NOTES
+          //   |><|
+          // SEE ALSO
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          // FORMAT VERSION:    0.0
+          
+          CString &CIDParser::operator [](int nIndex)
+          {
+          }
+        
+        - Resulted:
+          //////////////////////////////////////////////////////////////////////
+          // CString() -- 
+          // CLASS:    NONE
+          // AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+          // VISIBILITY:    PUBLIC | PRIVATE
+          // SYNOPSIS
+          // DESCRIPTION
+          //   |>Description of function<|
+          // ARGUMENTS
+          //   CIDParse () --
+          // RETURNS:    NOTHING
+          // EXCEPTIONS:    NONE
+          // NOTES
+          //   |><|
+          // SEE ALSO
+          //   |><|
+          // CAVEATS AND BUGS
+          //   |><|
+          // FORMAT VERSION:    0.0
+          
+          CString &CIDParser::operator [](int nIndex)
+          {
+          }
+        
+        - Differences:
+          2,4c2,4
+          < // operator [] -- XXXPOINTXXX
+          < // CLASS:    CIDParser
+          < // AUTHOR:    Dewey M. Sasser
+          ---
+          > // CString() -- 
+          > // CLASS:    NONE
+          > // AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+          10,12c10,11
+          < //   nIndex (int) --
+          < // RETURNS
+          < //   (CString) -- 
+          ---
+          > //   CIDParse () --
+          > // RETURNS:    NOTHING
+        
+    

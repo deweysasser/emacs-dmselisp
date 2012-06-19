@@ -1,0 +1,20 @@
+;; this file is a collection of checklists
+
+Add a file:
+  o Add the file to nvscomp.el list
+  o Add the file to makefile
+  o Add the file to nvs-auto.el
+  o Add the file to elisp.texi
+  o Add the file to cvs
+  o Add to release notes if appropriate
+
+Make a Release:
+  o commit changes to cvs
+  o byte compile all files from scratch
+  o Do and review a full test
+  o Update documentation
+  o Do installation test
+  o package file, post to ftp site
+  o make release announcement, include release notes
+
+

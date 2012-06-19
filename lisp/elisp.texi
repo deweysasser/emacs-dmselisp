@@ -1,0 +1,1549 @@
+\input texinfo   @c -*-texinfo-*-
+@c %**start of header
+@setfilename elisp.info
+@settitle NVS Elisp
+@c %**end of header
+
+@setchapternewpage odd
+
+@ifinfo
+This is a short example of a complete Texinfo file.
+
+Copyright @copyright{} 1997 Dewey M. Sasser
+@end ifinfo
+
+@titlepage
+@sp 10
+@center @titlefont{Sample Title}
+
+@c The following two commands start the copyright page.
+@page
+@vskip 0pt plus 1filll
+Copyright @copyright{} 1996 Dewey M. Sasser
+@end titlepage
+
+
+@ifinfo
+@end ifinfo
+
+@node Top, Introduction, (dir), (dir)
+
+This documentation is for the NVS standard programming tools.  Many of
+these tools are emacs lisp code designed to assist in editing programs
+and automatically (or semi-automatically) maintain documentation in the
+NVS standard format.  Others are used for general help coding, still
+more are general emacs lisp packages.
+
+For a list of new features and bug fixes in this release, @pxref{Release 1.9.4}. 
+
+@menu
+* Introduction::                Documentation conventions, installation
+* Coding Tools::                Assistance in coding and formatting code
+* Documentation Tools::         Help in documentation
+* AutoProto::                   Automatic prototype generation
+* Major Modes::                 Various major modes in the distribution
+* Lisp Packages::               Useful lisp packages (if you're into that)
+* Known Problems::              Known bugs and caveats
+* Release Notes::               Release Notes for specific versions
+* Non-EMACS Tools::             Other tools not based in emacs
+* Appendix::                    Other information
+* Concept Index::               
+* Function Index::              
+* Variable Index::              
+@end menu
+
+@node   Introduction, Coding Tools, Top, Top
+@chapter Introduction
+
+
+@menu
+* Document Conventions::        Conventions for this document
+* Obtaining the latest::        Where to get it
+* Installation::                How to install it
+* Supported Emacen::            Will it run
+* Getting help::                Help!  It wont!
+@end menu
+
+@node Document Conventions, Obtaining the latest, Introduction, Introduction
+@section Document Conventions
+Standard NVS EMACS Lisp Packages
+Conventions:  Throughout this section, the following types are presented in the following styles:
+
+@deffn Command command-name arguments
+@end deffn
+
+@defun functions arguments
+@end defun
+
+@defmac macros arguments
+@end defmac
+
+@defvar{Variables}
+@end defvar
+
+Symbols
+
+@example
+Example Code
+@end example
+
+@lisp
+Lisp code
+@end lisp
+
+@samp{literal text}
+
+@node Obtaining the latest, Installation, Document Conventions, Introduction
+@section Obtaining the latest
+
+The latest emacs lisp tools can be obtained from
+@url{ftp://ftp.newvision.com/pub/ptools/elisp-1.9.1.tgz}.  If you have
+any trouble accessing it, contact the author, Dewey Sasser via email to
+@email{dewey@@newvision.com}.
+
+@node Installation, Supported Emacen, Obtaining the latest, Introduction
+@section Installation
+@cindex Installation
+
+@node Supported Emacen, Getting help, Installation, Introduction
+@section Supported Emacen
+GNU Emacs 19.XX
+
+@node Getting help,  , Supported Emacen, Introduction
+@section Getting help
+@cindex Getting Help
+
+Read the manual, then mail to the ptools mailing list (after joining, of
+course).  If all else failed, mail to @email{dewey@@newvision.com}.
+
+@menu
+* The mailing list::            Ptools discussion mailing list
+@end menu
+
+@node The mailing list,  , Getting help, Getting help
+@subsection The Ptools mailing list
+@cindex Ptools Mailing list
+
+Email to @email{ptools-request@@newvision.com} with the mail body having
+only the word @samp{subscribe}.
+
+To post to the list, mail to @email{ptools@@newvision.com}.
+
+To unsubscribe, mail to @email{ptools-request@@newvision.com} with the
+mail body having only the word @samp{unsubscribe}.
+
+@node Coding Tools, Documentation Tools, Introduction, Top
+@chapter Coding Tools
+
+@menu
+* 'C' header assistance::       Help in what goes in to your header files
+* Code Alignment::              Aligning your code in different ways
+* 'C' Comment Manipulation::    What you can do with your comments
+* Miscellaneous::               
+* Variables::                   
+* Functions/Macros::            
+* Automated Symbol Searching::  
+@end menu
+
+@node 'C' header assistance, Code Alignment, Coding Tools, Coding Tools
+@section 'C' header assistance
+@cindex Header Maintainance
+These functions create a maintain the NVS standard header of the following form:
+
+@example
+
+/*********************************************************************
+ * emprn.c -- printer emulation for DTS
+ * Author          : Dewey M. Sasser 
+ * Created On      : Wed Mar  9 17:08:57 1994
+ * Status          : $State: Exp $
+ * Keywords        : 
+ * PURPOSE
+ *      |>Description of modules purpose<|
+ * 
+ * TABLE OF CONTENTS
+ *   isr -- interrupt handler for parallel port interrupt
+ *   restore_vec -- restore interrupt vector
+ *   initialize -- initialize the DTS
+ *   timer_isr -- interrupt handler for the timer interrupt
+ *   fake_input -- fake the input when doing a test
+ *   SetupCfgFile -- read the initialization file, etc
+ *   ProcessCommandLine -- just that
+ * 
+ * $RCSfile: elisp.texi,v $
+ * $Revision: 1.5 $
+ **********************************************************************/ 
+@end example
+
+@menu
+* Header Introduction::         What it is
+* Header Variables::            Controlling variable
+* Header Functions::            Commands
+* Time and Date stamps::        Inserting time and date stamps
+@end menu
+
+@node Header Introduction, Header Variables, 'C' header assistance, 'C' header assistance
+@subsection Introduction
+The file name and template of the header are created when one of these functions has been run.  The table of contents and update time/date, author and count are automatically maintained.
+
+The Table of Contents is created by searching the file for all of the functions documented with the NVS standard function header.  Also provided are functions for semi automatic creation of the function header.
+
+When using the NVS standard elisp package, this header is automatically inserted into all .c files and .h files.  It will, however, work for any file for which an EMACS file mode has been defined.  This includes, but is not limited to:  C++, Lisp, Emacs Lisp, Scheme, Awk, Borne-Shell, and Perl.
+
+To create the header for a file which does not already have it, use the function make-header.  For information about automatic insertion of this header for files other than .c and .h files, Section 1.5 entitled Automatic Creation Events.
+
+Note that a copyright message is automatically inserted in the header.  This message is, by default, as follows:
+Copyright 2012 Dewey M. Sasser  All Rights Reserved
+
+The variable header-copyright-notice will be inserted as the text of this copyright message.  You may turn on or off the copyright message by using the functions copyright-message-on and copyright-message-off.
+
+C Function documentation is produced by running the function document-c-function with the point before the particular C or C++ function, the filling out the template.  Any function documented with this template will automatically be placed in the table of contents for a particular file.  Any function that is not documented in the form will not.  A C function synopsis can be updated by running the function update-function-synopsis.
+
+
+@node Header Variables, Header Functions, Header Introduction, 'C' header assistance
+@subsection Header Variables
+@defvar{include-copyright-notice}
+   Set this to nil if copyright notice should be inhibited.
+@end defvar
+   
+@defvar{header-copyright-notice} A string containing a copyright
+disclaimer to be inserted into all headers.  This string needs no
+leading blanks and may contain any number of lines.  May be nil.
+@end defvar
+
+@defvar{c-template-map}
+Keymap used in c or c++ mode for smart template operations.
+@end defvar
+
+@defvar{header-insert-arguments}
+If this variable is non-nil, function arguments will be searched for and
+inserted into the function documentation template, along with the
+functions return value.  Void return values are handled correctly.
+@end defvar
+
+
+@node Header Functions, Time and Date stamps, Header Variables, 'C' header assistance
+@subsection Functions
+
+@deffn Command copyright-notice-off 
+Set copyright notice to not be included.
+@end deffn
+
+@deffn Command copyright-notice-on 
+Set copyright notice to be included.
+@end deffn
+
+@deffn Command update-file-header 
+If the file has been modified, searches the first header-max chars in the
+   buffer using the regexps in file-header-update-alist. When a match is
+   found, it applies the corresponding function with the point located just
+   after the match.  The functions can use (match-beginning) and
+   (match-end) calls to find out the strings that causes them to be invoked.
+@end deffn
+
+@deffn Command make-box-comment &optional end-col 
+Inserts a box comment that is built using mode specific comment characters.
+@end deffn
+
+@deffn Command make-divisor &optional end-col 
+A divisor line is the comment start, filler, and the comment end
+@end deffn
+
+@deffn Command make-revision 
+Inserts a revision marker after the history line.  Makes the history
+line if it does not already exist.
+@end deffn
+
+@deffn Command make-header 
+Makes a standard file header at the top of the buffer. A header is
+   composed of a mode line, a body, and an end line.  The body is
+   constructed by calling the functions in make-header-hooks.
+   The mode line and end lines start and terminate block comments while the
+   body lines just have to continue the comment. 
+@end deffn
+
+@deffn Command fill-line-with-preceding-character &optional column character 
+Fills a line with a character preceding the point.If column is not provided, fill-column is used.
+If character is not provided, last non white space character is used.
+@end deffn
+
+
+@node Time and Date stamps,  , Header Functions, 'C' header assistance
+@subsection Time and Date Stamp shortcuts
+@cindex Time and Date Shortcuts
+
+@deffn Command insert-current-date 
+Inserts the Current Date
+@end deffn
+
+@deffn Command insert-current-date-and-time 
+Inserts the date and time into the buffer at the current point.
+@end deffn
+
+@node Code Alignment, 'C' Comment Manipulation, 'C' header assistance, Coding Tools
+@section Code Alignment
+@cindex Code Alignment
+
+There are two basic alignment tools in this package:  equals and general
+regular expressions.  Both work by marking a region and then calling the
+function.  The equals alignment aligns all equals operators (=, ==, +=,
+-=, etc) within the block.  The regular expression alignment prompts for
+a regular expression and aligns the first match in each block.
+
+The regular expression alignment can also be used in a more flexible way
+programatically.
+
+
+@menu
+* Alignment Functions::         Functions you use for code alignment
+@end menu
+
+@node Alignment Functions,  , Code Alignment, Code Alignment
+@subsection Functions
+@cindex Aligning = operators
+@cindex Aligning regular expressions
+
+@deffn Command align-equals start end 
+make the first assignment operator on each line line up vertically
+@end deffn
+
+@deffn Command align-regexp regexp begin end &optional no-space pad-char subexp-num 
+
+This simple function is the most wonderful function of all time.
+
+Well maybe not quite, but it is right up there.  It is similar to the
+align-equals function, but prompts for a regexp.  It finds the first
+occurrence of that regexp in each line, and lines them up as far left as
+possible but no further left than the leftmost occurrence in any of the
+lines.
+
+"Huh?", you say?  An example will make everything clear.  Consider a
+marked region containing this text:
+
+@example
+  bool operator< (const char* abc) @{ return strcmp(LS_Str, abc) < 0; @}
+  bool operator> (const char* s) @{ return strcmp(LS_Str, s) > 0; @}
+  bool operator<= (char* s) @{ return strcmp(LS_Str, s) <=0; @}
+  bool operator>= (char* s) @{ return strcmp(LS_Str, s) >=0;   @}
+@end example
+
+Performing align-regexp and entering "@{" will yield:
+
+@example
+  bool operator< (const char* abc) @{ return strcmp(LS_Str, abc) < 0; @}
+  bool operator> (const char* s)   @{ return strcmp(LS_Str, s) > 0; @}
+  bool operator<= (char* s)        @{ return strcmp(LS_Str, s) <=0; @}
+  bool operator>= (char* s)        @{ return strcmp(LS_Str, s) >=0;   @}
+@end example
+
+Doing it again on the same region with "@}" yields:
+
+@example
+  bool operator< (const char* abc) @{ return strcmp(LS_Str, abc) < 0; @}
+  bool operator> (const char* s)   @{ return strcmp(LS_Str, s) > 0;   @}
+  bool operator<= (char* s)        @{ return strcmp(LS_Str, s) <=0;   @}
+  bool operator>= (char* s)        @{ return strcmp(LS_Str, s) >=0;   @}
+@end example
+
+You could also use a longer string.  Given the original form, entering
+"return" would give:
+
+@example
+  bool operator< (const char* abc) @{ return strcmp(LS_Str, abc) < 0; @}
+  bool operator> (const char* s) @{   return strcmp(LS_Str, s) > 0; @}
+  bool operator<= (char* s) @{        return strcmp(LS_Str, s) <=0; @}
+  bool operator>= (char* s) @{        return strcmp(LS_Str, s) >=0;   @}
+@end example
+
+By lining up things from left to right, you can pretty much make any
+alignment.  Furthermore, you can perform multiple alignments at once,
+by specifying a comma separated list of expressions to align.  For
+example, the string "@{,@}" would align the opening and closing braces
+in the above text.
+
+Beware of regexp chars with special meanings.  With a numeric prefix,
+the function does not force a space in the text.
+
+When called non-interactively, it has the following arguments:
+
+@example
+    (align-regexp regexp begin end &optional no-space pad-char subexp-num)
+
+    regexp       - string for the regular expression to align.  This
+                   can contain multiple comma separated regexps.  To
+                   use a comma in the expression, backslash escape it.
+
+    begin        - start of region on which to operate
+
+    end          - end of region on which to operate
+
+    no-space     - numeric prefix from interactive call.  1 will always
+                   force at least once space, >1 will not.
+
+    pad-char     - character to use for adjusting text instead of
+                   the default space.
+
+    subexp-num   - the number of the subexpression within regexp which
+                   is where the alignment should begin.  This is usually
+                   0 for the entire regexp (and thus the alignment
+                   happens at the beginning of it) but it could be
+                   something else.  Passed to match-beginning.
+@end example
+@end deffn
+
+
+
+@node 'C' Comment Manipulation, Miscellaneous, Code Alignment, Coding Tools
+@section 'C' Comment Manipulation
+@cindex Working with comments
+
+@menu
+* Comment Functions::           Functions for commenting
+@end menu
+
+@node Comment Functions,  , 'C' Comment Manipulation, 'C' Comment Manipulation
+@subsection Functions
+
+@deffn Command make-block-region &optional region-start region-end top-border bottom-border left-border right-border width depth 
+Put a box around a region, delimited by key'd characters
+@end deffn
+
+@deffn Command block-comment-line arg 
+Put the current line in a block comment.
+@end deffn
+
+@deffn Command uncomment-region 
+Strip out rectangular blocks in a region. The comment look like this (for 'C'):
+
+@example
+/*******************************************************************/ 
+/* This is a block comment region:                                 */
+/* My Prog:  whatever                                              */
+/*******************************************************************/
+@end example
+
+and can be make by marking a region and typing \[block-comment-region].
+@end deffn
+
+@deffn Command block-comment-region arg start end 
+Wrap a rectangular block of comments around region.  'C' Example: 
+@example
+/*******************************************************************/ 
+/* This is a block comment region:                                 */
+/* My Prog:  whatever                                              */
+/*******************************************************************/
+@end example
+
+This can be removed with uncomment-region (\[uncomment-region]).
+@end deffn
+
+@deffn Command recomment-block 
+Fills paragraph for the block-styled comment point is in.  Point must
+be in a block comment, it cannot not be on the 1st or last line.
+My definition of a comment block looks like this:
+@example
+/*********************************************************/
+/* You mean you actually comment code?                   */
+/*                                                       */
+/*                                                       */
+/*********************************************************/
+@end example
+You can change the regexps for different looking comment lines.
+
+@end deffn
+
+@deffn Command comment-straighten-right-edge 
+Align the right-hand edges of a comment
+of the form (example in C):
+@example
+/* Here is the first line */
+/* of a multiple          */
+/* comment in your code.  */
+@end example
+The alignment is made on the longest line of a sequence of
+consecutive comment lines, starting with the current line.
+@end deffn
+
+
+
+
+@node Miscellaneous, Variables, 'C' Comment Manipulation, Coding Tools
+@section Miscellaneous
+@cindex Compilation error messages
+
+@menu
+* Variables::                   Random useful variables (compilation regexps, etc)
+* Functions/Macros::            Random useful functions
+* Automated Symbol Searching::  Searching for the current symbol
+@end menu
+
+@node Variables, Functions/Macros, Miscellaneous, Coding Tools
+@section Variables
+
+@defvar microsoft-error-regexp
+Error Regexp used for parsing MicroSoft Errors
+@end defvar
+
+@defvar byacc-error-regexp
+Error Regexp used for parsing Berkeley YACC Errors
+@end defvar
+
+@defvar gcc-error-regexp
+Error Regexp used for parsing GCC Errors
+@end defvar
+
+@defvar borland-c-error-regexp
+Error Regexp used for parsing Borland C/C++ Errors
+@end defvar
+
+
+
+@node Functions/Macros, Automated Symbol Searching, Variables, Coding Tools
+@section Functions/Macros
+
+@deffn Command kill-email-address prefix 
+Remove the <user@@system> from the author lines.
+Removes only email address of current user at current system.  Any prefix
+(C-u \[kill-email-address]) removes line containing the current user
+with any system.
+@end deffn
+
+@deffn Command kill-buffer-delete-window 
+Kills the current buffer and deletes it's window.
+@end deffn
+
+@deffn Command save-all-buffers 
+Saves all buffers with an associated file by calling
+(save-some-buffers 1)
+@end deffn
+
+@deffn Command end-and-newline-and-indent 
+Go to end of line, then insert newline and indent. This function is useful for hitting return while in a comment.
+@end deffn
+
+@deffn Command insert-user-full-name-and-date 
+Insert name and date into buffer at current point.
+@end deffn
+
+@deffn Command auto-fill-off 
+Turn off auto-fill-mode.
+@end deffn
+
+@deffn Command auto-fill-on 
+Turn on auto fill mode.
+@end deffn
+
+@deffn Command revert-buffer-noask 
+Revert the buffer without prompting for yes or no.
+@end deffn
+
+   
+@node Automated Symbol Searching,  , Functions/Macros, Coding Tools
+@section Slightly More Automated Symbol Searching
+@cindex Advance Symbol Searching
+
+@defun search-backward-current-symbol
+Searches for the preceding occurrence of the symbol under the current point.
+@end defun
+
+@defun search-forward-current-symbol
+Searches for the preceding occurrence of the symbol under the current point.
+@end defun
+
+@defun find-toc-entry
+Find a function definition from a table of contents entry.  Place the
+point on a line in the table of contents and this function will move the
+point to the respective place in the file.
+@end defun
+
+@menu
+* Spell Checking::              
+@end menu
+
+@node Spell Checking,  , Automated Symbol Searching, Automated Symbol Searching
+@subsection Spell Checking
+
+@deffn Command ispell-strings 
+Run Ispell region on all strings in the current buffer.
+@end deffn
+
+@deffn Command ispell-comments 
+Run Ispell region on all comments in the buffer
+@end deffn
+
+This function can be used to apply one of the previous functions to a
+group of files marked in dired.  @xref{Dired,,,emacs}.
+
+@deffn Command dired-do-command command 
+Apply COMMAND to all files marked in dired
+@end deffn
+
+
+@node Documentation Tools, AutoProto, Coding Tools, Top
+@chapter Documentation Tools
+@cindex Documentation Tools
+
+@menu
+* Automatic Header Maintenance::  Automatically maintain file headers
+* Function Documentation::      Documenting functions
+* Class Documentation::         Documenting classes
+@end menu
+
+Also, for checking spelling of strings, @pxref{Spell Checking}
+
+@node  Automatic Header Maintenance, Function Documentation, Documentation Tools, Documentation Tools
+@section Automatic Header Maintenance
+@cindex Header Maintainance
+
+This package is responsible for maintaining the Table of Contents and last update information for each file, once the package is loaded, it will automatically update the header information every time the file is saved.  
+
+If you do not have the header inserted upon file creation, you can make it at any time with the function make-header.
+
+The following section, Control Variables, describes variables that can be set to affect the way the header is inserted, or controls the text inserted in the header.
+Control Variables
+
+@defvar header-status-string
+A string to be inserted as the status.If it doesn't exist, the status is
+ "Experimental".  This is used by make-header on \[make-header].
+
+The default is nil
+@end defvar
+
+@defvar header-copyright-notice
+A string containing a copyright disclaimer to be inserted into all headers.
+   This string needs no leading blanks and may contain any number of lines.
+   May be nil.
+
+The default is nil
+@end defvar
+
+@defvar header-max
+Is the number of characters at the start of a buffer that will be
+   searched for header info to automatically update.
+
+The default is 2000
+@end defvar
+
+@defvar header-author-string
+Inserted as the author if it is non nil, otherwise, the current 
+user's name and email address is used.
+
+The default is nil
+@end defvar
+
+@defvar inhibit-email-address
+This is set non-nil if the package SHOULD NOT put in email addresses.
+
+The default is nil
+@end defvar
+
+@defvar include-copyright-notice
+Set this to nil if copyright notice should be inhibited.
+
+The default is nil
+@end defvar
+
+@node Function Documentation, Class Documentation, Automatic Header Maintenance, Documentation Tools
+@section Function Documentation
+
+@deffn Command display-field-documentation field 
+Display help for a chosen field.  Prompts for the field
+@end deffn
+
+@deffn Command help-for-field 
+Give some quick help on what the current documentation field is for
+and how to use it
+@end deffn
+
+@deffn Command document-function delete-old 
+Insert a comment block containing the module title, author, etc.  To
+   use, place the cursor on or before the line starting the function definition.
+
+   Functions with these headers can be automatically placed into the table
+   of contents by the update-table-of-contents command.
+
+   The synopsis can be automatically constructed by the
+   update-function-synopsis (\[update-function-synopsis]) command.
+@end deffn
+
+
+@node Class Documentation,  , Function Documentation, Documentation Tools
+@section Class Documentation
+
+@deffn Command document-class 
+Put in documentation template for C++ class
+@end deffn
+
+@node AutoProto, Major Modes, Documentation Tools, Top
+@chapter Automatic Prototype Generation:  AutoProto
+@cindex Automatic 'C' Prototype Generation
+
+The AutoProto package automatically extracts prototypes from a 'C'
+buffer and writes them to the user specified 'H' buffer.
+
+@menu
+* Autoproto Introduction::      What it is, what is does.
+* Autoproto Variables::         Controlling variables
+* Autoproto Functions::         User functions
+@end menu
+
+@node Autoproto Introduction, Autoproto Variables, AutoProto, AutoProto
+@section Introduction
+The AutoProto packages was written to assist in prototype maintenance for C programs.  It may also be useful for C++ programs, but it does not break the prototypes down by class.  It treats static functions differently from external functions.
+
+When a new file is created, you must run the function make-autoproto, which inserts keys into the current buffer (in a comment) to allow the package to find the files for the prototypes.  When the prototypes of all functions in a file should be created or updated, the function autoproto-update is run.  This is a batch update of all functions.  
+
+The only control variable for this packages is the variable autoproto-inhibit-mode-check.  If this variable is nil (default), then the autoproto package will only run in "c-mode" or "c++-mode".
+
+Note that the first time you do an update, the prototypes will be appended to the proper file.  It may be necessary to rearrange the file the first time only.   In each additional update, the prototypes will be maintained in the proper place.
+
+
+@node Autoproto Variables, Autoproto Functions, Autoproto Introduction, AutoProto
+@section Variables
+
+@defvar autoproto-inhibit-mode-check
+Set this variable to make AutoProto run regardless of mode.
+If this variable is nil, AutoProto will only run in c-mode or c++-mode.
+
+The default is nil
+@end defvar
+
+@defvar autoproto-info-message
+Put in informational message with make-autoproto.
+If This variables it 't, autoproto inserts some descriptive text into
+the buffer with the prototypes.
+
+The default is nil
+@end defvar
+
+@defvar autoproto-here
+String to use when filename is 'here'.
+
+The default is nil
+@end defvar
+
+
+
+@node Autoproto Functions,  , Autoproto Variables, AutoProto
+@section Functions
+
+@deffn Command make-autoproto extern static 
+Creates the autoproto header line. This function prompts for the
+filenames to put to prototypes into, and inserts the keys into the
+buffer for autoproto-update to locate the proper files.
+@end deffn
+
+@deffn Command autoproto-update 
+Update the prototypes for a file.
+@end deffn
+
+
+@node Major Modes, Lisp Packages, AutoProto, Top
+@chapter Major Modes
+@cindex Major Modes
+
+@menu
+* Multi-mode::                  Having several modes in one buffer
+* Visual Test Mode::            Microsoft Visual Test Files
+* InstalIt Mode::               InstallIT files
+* Assembly Mode::               many assembly languages
+* Bison/Yacc Mode::             Bison or Yacc files
+* Awk Mode::                    Awk Files
+@end menu
+
+@node  Multi-mode, Visual Test Mode, Major Modes, Major Modes
+@section Multi-mode
+@cindex Multi-mode
+
+Multi-mode allows you to have multiple major modes in one buffer.
+
+@node  Visual Test Mode, InstalIt Mode, Multi-mode, Major Modes
+@section Visual Test Mode
+@cindex Visual Test Mode
+
+Visual Test Mode is a mode for editing Microsoft's Visual Test
+language.  Woe be unto you if you are using that language.
+
+The mode does basic indention, syntax highlighting and supports the NVS
+documentation functions.
+
+@menu
+* MSVT Commands::               
+* MSVT Variables::              
+@end menu
+
+@node MSVT Commands, MSVT Variables, Visual Test Mode, Visual Test Mode
+@subsection MSVT Commands
+
+@deffn Command msvt-indent-command 
+Indent the current line as appropriate
+@end deffn
+
+@node MSVT Variables,  , MSVT Commands, Visual Test Mode
+@subsection MSVT Variables
+
+@defvar msvt-syntax-indention
+Indention entries for msvt indention.  Use msvt-syntax-indention to modify
+
+The default is nil
+@end defvar
+
+@defvar msvt-syntax-end-indention
+Indention to modify based on this line
+
+The default is nil
+@end defvar
+
+@defvar msvt-basic-indent
+Basic level of indention used in MS Visual Test mode
+
+The default is 3
+@end defvar
+
+
+
+@node  InstalIt Mode, Assembly Mode, Visual Test Mode, Major Modes
+@section InstalIt Mode
+@cindex InstalIt Mode
+
+InstalIt Mode is a major mode for editing InstalIt code.  It only
+supports basic syntax.
+
+@node Assembly Mode, Bison/Yacc Mode, InstalIt Mode, Major Modes
+@section Assembly Mode
+@cindex Assembly Mode
+
+@node Bison/Yacc Mode, Awk Mode, Assembly Mode, Major Modes
+@section Bison/Yacc Mode
+@cindex Bison/Yacc Mode
+
+@node Awk Mode,  , Bison/Yacc Mode, Major Modes
+@section Awk Mode
+@cindex Awk Mode
+
+@node    Lisp Packages, Known Problems, Major Modes, Top
+@chapter Emacs Lisp Packages
+
+
+@menu
+* Cando::                       Parameterizing .emacs on capabilities
+* Object Oriented Elisp::       Crippled (but rather fast) sort-of-CLOS
+* Mode Specific Functions::     Specialize functions on mode
+* Elisp Testing Facility::      Package for testing emacs lisp code
+* Creation Events::             Events that occur at file creation
+@end menu
+
+
+@node Cando, Object Oriented Elisp, Lisp Packages, Lisp Packages
+@section Cando:  .emacs customization
+@cindex Cando: .emacs parameterization
+
+The purpose of the cando elisp package is to allow use of one .emacs
+file for multiple emacs platforms and to use high level descriptions of
+customizations.
+
+For example, the hilit19 package requires that the emacs can handle
+faces.  Rather than doing something like:
+
+@example
+(if (and
+     window-system
+     (string< "19.19" emacs-version))
+    (require 'hilit19))
+@end example
+
+@noindent 
+You would simply put:
+
+@example
+(if-cando 'hilit19
+          (require 'hilit19))
+@end example
+
+@menu
+* Using conditionals::          How to use the package
+* Existing capabilities::       What you can parameterize on
+* Defining new capabilities::   How to extend it
+@end menu
+
+@node Using conditionals, Existing capabilities, Cando, Cando
+@subsection Using conditionals
+
+@deffn Macro if-cando condition &rest body 
+Execute body if condition is true.  See documentation for function `cando' for details.
+@end deffn
+
+@deffn Macro on-computer computer-name &rest body 
+Execute BODY of macro only if the current system's name is COMPUTER-NAME.
+COMPUTER-NAME should be allow lower case and it will match only the
+hostname part of the computer's name.
+@end deffn
+
+@deffn Function cando name 
+Return 't if the current system can do NAME.
+NAME can be a symbol, in which case conditions are evaluated for that
+symbol, or name can be a list, possibly starting with `and' or `or'.
+If name is a list that does not begin with `and' or `or', it implies `and'.
+@end deffn
+
+
+To use conditionals, in your .emacs file load the @file{cando.el}
+library first, then use @code{if-cando}.
+
+You might want to make sure the cando library is in your home directory
+on all machines (I do).
+
+If you have any variations that are specific to certain machines, you
+can use the macro @code{on-computer} to specify them.
+
+For example, suppose I have a laptop named @sc{AEROSMITH} that can
+boot two operating systems (OS/2 and Microsoft Windows NT), and a
+desktop machine @sc{CRINKLEBIND} that can boot only NT.
+
+Now, suppose that CVS works only on @sc{aerosmith} and under OS/2.  I also
+have PGP that works only on @sc{aerosmith} (but under both NT and OS/2).
+
+I could have the following @file{.emacs} file:
+
+@example
+;;; Definitions
+(on-computer "aerosmith"
+             (setcando 'mail 't) ;; AEROSMITH is where I keep my mail
+             (if-cando 'os2
+                       (setcando 'cvs 't)
+                       ;; CANDO knows that mailcrypt depends on PGP and
+                       ;; mail, so all we have to say is that we can do
+                       ;; those things.
+                       (setcando 'pgp 't)))
+
+(on-computer ("aerosmith" "crinklebind")
+             (setcando 'nvselisp 't))
+                       
+
+;;; Configuration
+
+(if-cando 'nvselisp
+        (require 'nvs))
+
+(if-cando 'mailcrypt
+          (require 'mailcrypt)
+          ;; do mailcrypt init stuff
+          )
+
+(if (not (cando 'cvs))
+        (setq vc-handle-cvs nil))
+
+@end example
+
+The top of the file is some definitions about what systems can do what.
+The rest of the file is parameterized not around what system you're on
+or some such, but around what the current system can do.
+
+The advantage of this is that if system capabilities change (for
+example, I get a port of CVS to NT), I can change the definition and the
+rest falls out naturally.          
+
+@node Existing capabilities, Defining new capabilities, Using conditionals, Cando
+@subsection Existing capabilities
+
+@itemize @bullet
+@item hilit19
+@item time
+@item screen-colors
+@item os2-pm-fonts
+@item type-break
+@item mailcrypt
+@item font-lock
+@end itemize
+
+@node Defining new capabilities,  , Existing capabilities, Cando
+@subsection Defining new capabilities
+
+You can use the @code{setcando} macro to set the conditions under which
+a certain function can be done.
+
+@deffn Macro setcando name &rest body 
+Define conditions under which name can be done.
+NAME must be a symbol which is the cando symbol.  Rest is a list of
+forms, each of which must evaluate to 't, for (cando 'NAME) to result
+in 't.
+
+Conditions are *not* evaluated immediately, but only when the cando is
+tested.  It is therefore possible to refer to conditions, such as
+other cando's, that have not yet been satisfied.
+
+Beware, however, of circular dependencies.
+@end deffn
+
+The arguments to setcando are a name (watch it---it must be quoted), and
+one or more forms.
+
+All of the forms must evaluate to true for the cando to be done.  
+
+You can refer to previous cando's in the definition.  For example,
+here's the setcando for os2-pm-fonts:
+
+@example
+(setcando 'os2-pm-fonts
+          (cando 'faces)
+          (cando 'os2))
+@end example
+
+@noindent
+and here's the one for hilit19:
+
+@example
+(setcando 'hilit19
+          (string-lessp "19" emacs-version)
+          (cando 'faces))
+@end example
+
+
+If you do a @code{setcando} on a function which is already set, your new
+definition will replace the old one and be used in all (including cando
+system defined) cando tests.
+
+If you define new cando that are general.  (Not just to the emacs
+distribution but to any available lisp package), please send them to me
+@email{dewey@@newvision.com} to include in the cando package.
+
+
+@node  Object Oriented Elisp, Mode Specific Functions, Cando, Lisp Packages
+@section Object Oriented Elisp
+@cindex Object Oriented Elisp
+
+This supports crippled classes.
+
+You can define classes (using defstruct syntax) that use single
+inheritance and methods with multiple specialization.
+
+Method definition follows the syntax of @emph{CLOS} method definition.
+
+@deffn Macro defcmethod &rest arguments 
+Define a (crippled) method.  Methods can specialize on the FIRST
+argument only
+@end deffn
+
+@deffn Macro defcclass &rest args 
+Define a c like class -- this is a defstruct, but we can hook the
+:include
+@end deffn
+
+@node Mode Specific Functions, Elisp Testing Facility, Object Oriented Elisp, Lisp Packages
+@section Mode Specific Functions
+@cindex Mode Specific Functions
+
+Implements functions whose methods can change according to the mode of
+the current buffer.  Calling these functions is completely transparent
+to the calling function.
+ 
+The purpose of this functionality is to be able to write functions that
+behave differently in different modes, without having to put in specific
+knowledge of the functions existence to the calling function.
+
+
+
+@menu
+* Usage::                       How to use it
+* Improvements::                Improvements that could (may) be made
+@end menu
+
+@node Usage, Improvements, Mode Specific Functions, Mode Specific Functions
+@subsection Usage
+Put this package somewhere in your lisp path and byte-compile it.  Any
+code that uses this package should @code{(require 'modefn)}.  Then,
+simply define mode specific functions and use those functions as normal.
+For example:
+
+@example
+(defun document-function ()
+  (interactive)
+  (let ((args (parse-function-arguments)))
+    (do-something-with
+     args)))
+
+(defmodemethod parse-function-arguments c-mode ()
+  )
+
+(defmodemethod parse-function-arguments perl-mode ()
+  )
+@end example
+
+Note that the "mode" argument of defmodemethod is the same
+symbol as that found in the major-mode variable.
+
+@menu
+* Interface::                   Interface functions and macros 
+@end menu
+
+@node Interface,  , Usage, Usage
+@subsubsection Interface
+
+@deffn Macro defmodemethod name mode args &rest body 
+args: NAME MODE ARGS &rest BODY
+Define a function that is mode specific.  If MODE is "default", the
+function defined is the default if no more specific mode method is
+defined
+@end deffn
+
+@deffn Macro defmodegeneric name args &rest body 
+defmodegeneric NAME ARGS DOCUMENTATION
+Define a generic mode specialized function
+@end deffn
+
+@deffn Macro defmodealias name mode &rest aliases 
+Make a mode specific function have two names.
+NAME MODE [NAME MODE]*
+@end deffn
+
+
+@node Improvements,  , Usage, Mode Specific Functions
+@subsection Improvements
+Right now the package works by mangling names of functions and putting
+them into the normal symbol table, after installing the "generic"
+function which can produce those mangled names on the basis of the
+current mode.
+
+In the future, it would probably be better to place the mode specific
+functions in a different place so that they don't clutter up the normal
+symbol table.  I've used a dollar sign ('$') in the mangled names, which
+doesn't seem too popular in lisp symbols, but it is a vulnerability
+
+
+
+@node Elisp Testing Facility, Creation Events, Mode Specific Functions, Lisp Packages
+@section Elisp Testing Facility
+@cindex Elisp Testing Facility
+
+This is an extensive facility used in testing emacs lisp functions.
+
+@menu
+* Types of tests::              
+@end menu
+
+@node Types of tests,  , Elisp Testing Facility, Elisp Testing Facility
+@subsection Types of tests
+
+@menu
+* black-box tests::             test functions with no side effects
+* buffer modifying tests::      test functions that modify buffers
+@end menu
+
+@node black-box tests, buffer modifying tests, Types of tests, Types of tests
+@subsubsection black-box tests
+
+@node buffer modifying tests,  , black-box tests, Types of tests
+@subsubsection buffer modifying tests
+
+@node Creation Events,  , Elisp Testing Facility, Lisp Packages
+@section Automatic Creation Events
+@cindex Automatic Creation Events
+This package allows the user to specify functions to be run when a file
+has been created.  The interface to this package is the variable
+created-file-alist.  This variables is a list of cons cells, the first
+element is a regular expression to match against the file name, and the
+second element is a function (of no arguments) to be called if the
+regular expression matches.  More than one match can occur.  The
+following is an example of adding a creation event for all files ending
+in .c:
+
+@example
+(append-to-list created-file-alist (cons "\\.h$" 'make-header))
+@end example
+
+
+@xref{Functions/Macros} for more information on append-to-list.
+
+@menu
+* Creation Variables::          Setting things up
+* Other Variables::             
+* Creation Functions::          
+@end menu
+
+@node Creation Variables, Other Variables, Creation Events, Creation Events
+@subsection Variables
+
+@defvar{created-file-hooks}
+Hooks to run when file is created.
+@end defvar
+   
+@defvar{created-file-alist}
+Alist of form (regexp . function-name) to be run at creation.  This
+function may also be used (via bound-p) to check for the presence of
+this package.
+@end defvar
+   
+ 
+
+@node Other Variables, Creation Functions, Creation Variables, Creation Events
+@subsection Other Variables
+   
+@defvar{header-max}
+Is the number of characters at the start of a buffer that will be
+searched for header info to automatically update.
+@end defvar
+   
+@defvar{file-header-update-alist}
+Used by update file header to know what to do in the file. Is a list of
+sets of cons cells where the car is a regexp string and the cdr is the
+fcn to call if the string is found near the start of the file.
+@end defvar
+   
+
+@node Creation Functions,  , Other Variables, Creation Events
+@subsection Functions
+
+@node Known Problems, Release Notes, Lisp Packages, Top
+@chapter Known Problems
+
+@itemize @bullet
+@item @code{update-function-synopsis} puts whitespace in to function documentation.
+@end itemize
+
+@node  Release Notes, Non-EMACS Tools, Known Problems, Top
+@chapter Release Notes
+
+This section contains the release notes for the past several versions.
+
+@menu
+* Release 1.9.4::               
+* Release 1.9.2::               
+* Release 1.9.1::               
+@end menu
+
+@node Release 1.9.4, Release 1.9.2, Release Notes, Release Notes
+@comment  node-name,  next,  previous,  up
+@section 1.9.4
+
+@menu
+* Summary (1.9.4)::             
+* New Features (1.9.4)::        
+* Bug Fixes (1.9.4)::           
+* Known Bugs  (1.9.4)::         
+@end menu
+
+@node Summary (1.9.4), New Features (1.9.4), Release 1.9.4, Release 1.9.4
+@comment  node-name,  next,  previous,  up
+@subsection Summary
+
+This release of the elisp documentation tools has several new features
+and some bug fixes (yet again).  The new features are not yet
+document.  
+
+@node New Features (1.9.4), Bug Fixes (1.9.4), Summary (1.9.4), Release 1.9.4
+@comment  node-name,  next,  previous,  up
+@subsection New Features
+
+@itemize @bullet
+@item added "align-regexp" package
+
+@item added an "idl-mode" and added entry to auto-mode-alist so that it is
+used for *.idl
+
+@item added ispell-comments and ispell-strings.  ispell-comments has
+problems with languages that use begin and end comment characters (like
+'C') because of some oddness (or rather lack of functionality) in emacs
+syntax understanding.
+
+@item Added pure-mode to auto-mode-alist for .plog files.  Pure mode is
+@emph{not} supplied with this package (get Rick's
+@email{rhb@@newvision.com} latest)
+
+@end itemize
+
+
+@node Bug Fixes (1.9.4), Known Bugs  (1.9.4), New Features (1.9.4), Release 1.9.4
+@subsection Bug Fixes
+
+@itemize @bullet
+@item No longer changes the kill ring when a file is saved
+
+@item no longer internally loads "c-mode", messing up post-19.30 Emacen
+
+@item AutoProto no longer chops up #endif
+
+@item document-function in c-mode no longer leaves an extra "*/"
+
+@end itemize
+
+
+
+@node Known Bugs  (1.9.4),  , Bug Fixes (1.9.4), Release 1.9.4
+@subsection Known Bugs
+
+@itemize @bullet
+
+@item ispell-comments (see "New Packages")
+
+@item pure.el not included
+
+@item align-regexp not documented
+
+@end itemize
+
+@node Release 1.9.2, Release 1.9.1, Release 1.9.4, Release Notes
+@section 1.9.2
+
+1.9.2 was never officially released, but was only release in Beta.  The
+actual "1.9.2" release is really @pxref{Release 1.9.4} (plus, of course,
+extra bug fixes).
+
+@menu
+* Summary (1.9.2)::             
+* Bug Fixes (1.9.2)::           
+@end menu
+
+@node  Summary (1.9.2), Bug Fixes (1.9.2), Release 1.9.2, Release 1.9.2
+@subsection Summary
+
+This release of the elisp documentation tools has several new features
+and some bug fixes (yet again).  The new features are not yet
+documented.  The primary bug fix allows it to compile on emacs pre-19.30.
+
+@node Bug Fixes (1.9.2),  , Summary (1.9.2), Release 1.9.2
+@comment  node-name,  next,  previous,  upBug Fixes
+@subsection Bug Fixes
+now requires the "backquote" package where appropriate
+
+
+@node Release 1.9.1,  , Release 1.9.2, Release Notes
+@section 1.9.1
+
+This release of the elisp documentation tools has several new features
+and some bug fixes.  One of the most important new features is class
+documentation.  (CPP macro documentation is also now supported).
+Please read over this summary for details.
+
+
+@menu
+* New Features::                
+* Bug Fixes 1.9.2::             
+* Cosmetic Changes::            
+* Defaults changes::            
+* To Do::                       
+* Known Bugs::                  
+@end menu
+
+@node New Features, Bug Fixes 1.9.2, Release 1.9.1, Release 1.9.1
+@subsection New Features
+
+@itemize @bullet
+
+@item The function @code{document-class} is now defined which inserts an NVS
+documentation template for a c++ class.  This is a straw man
+implementation.  Please send me your suggestions (or rather, discuss
+them on the ptools mailing list.) (@xref{Class Documentation}).
+
+@item @code{document-function} now works on preprocessor macros (caveat:  it
+assumes an int return type -- change this. (@xref{Function Documentation}). 
+
+@item NVS documentation templates now have a field called "FORMAT
+VERSION".  This field will be used with the documentation
+extraction tool to determine how to format the text fields.  Leave
+it alone.
+
+@item Mode specific functions are now byte-compiled for speed
+
+@item a (rudimentary) Microsoft Visual test mode has been created and
+associated with the extension ".mst".  @xref{Visual Test Mode}
+@end itemize
+
+
+@node Bug Fixes 1.9.2, Cosmetic Changes, New Features, Release 1.9.1
+@subsection Bug Fixes
+@itemize @bullet
+
+@item  GDB-mode:  removed the key-binding interfering with GDB mode startup
+
+@item @code{document-function}:  changed so it can handle failure to find the function
+
+@item @code{document-function}:  allow white space between function name and
+`(' character. 
+
+@item @code{document-function}:  modified regexp to match PERL arguments
+
+@item load up:  Removed @file{foo} as filename in autoloads (what was that doing there?)
+
+@end itemize
+
+@node Cosmetic Changes, Defaults changes, Bug Fixes 1.9.2, Release 1.9.1
+@subsection Cosmetic Changes
+
+@itemize @bullet
+@item Changed all user customization or user visible variables so that
+EMACS considers them user visible.
+@end itemize
+
+@node Defaults changes, To Do, Cosmetic Changes, Release 1.9.1
+@subsection Defaults changes
+@itemize @bullet
+
+@item Putting email addresses with names in file and function headers is
+now the default.  The variable @code{inhibit-email-address} controls
+this behavior (@pxref{Automatic Header Maintenance}).  Email address is
+taken from the variable user-mail-address.
+
+@end itemize
+
+@node To Do, Known Bugs, Defaults changes, Release 1.9.1
+@subsection To Do
+
+@itemize @bullet
+
+@item update the documentation (plans for TeX info node underway)
+@item Work on @code{document-class}
+@item write a better documentation extraction tool
+@item modify @code{document-function} to allow for c++ operator functions.
+
+@end itemize
+
+@node Known Bugs,  , To Do, Release 1.9.1
+@subsection Known Bugs
+
+@itemize @bullet
+
+@item @code{update-function-synopsis} does not erase old synopsis.  This only
+happens occasionally.
+
+@item @code{update-function-synopsis} puts whitespace in to function documentation.
+@end itemize
+
+
+@node Non-EMACS Tools, Appendix, Release Notes, Top
+@chapter Non-EMACS Tools
+@cindex Non-EMACS Tools
+
+@strong{Very Large Caveat:}  The tools mentioned in this section are
+very old and are no longer distributed with the standard elisp package.
+Look for a new tool in the near future (called XDoc) which replaces
+them.
+
+@menu
+* File Documentation::          
+* Project Documentation::       
+@end menu
+
+@node File Documentation, Project Documentation, Non-EMACS Tools, Non-EMACS Tools
+@section File Documentation
+
+@example
+Usage: MAKEDOC [-qvc] [-e ext] file [files ...]
+       -q: be quite about errors--don't complain if a file
+           can't be found.
+       -v: print a version string
+       -c: print all output to standard out.
+       -e ext:  set extension of outfile to ext
+
+       note that position of options does not matter.  All
+       options are determined before files are processed.
+@end example
+
+
+This program searches through the given files and extracts the file and
+function documentation into a file with the extension .doc.  Note that
+at the current time, the program does not support wild cards.  It is
+anticipated that wild cards will be supported in the near future.
+
+@node Project Documentation,  , File Documentation, Non-EMACS Tools
+@section Project Documentation
+@cindex Project Documentation
+mkfdocs [files] [more files] > files.txt 
+
+This program extracts the brief description of a file in the first line
+of the file header, and the Purpose section of that header, and writes
+it to standard out.  The output of this tool should be redirected to a
+summary file.  This program does accept wild card arguments.
+
+@node Appendix, Concept Index, Non-EMACS Tools, Top
+@chapter Appendix
+
+
+@menu
+* Manifest::                    
+@end menu
+
+@node Manifest,  , Appendix, Appendix
+@section Manifest
+
+@itemize @bullet
+@item align-eq.el       align equals
+@item align-regexp.el   align regular expressions
+@item alists.el         functions for manipulating association lists
+@item asm-mode.el       assembly language mode
+@item autoproto.el      automatic c prototype generation and maintainance
+@item awk-mode.el       awk mode
+@item bison-mode.el     bison (or Yacc) mode
+@item block-cm.el       manipulation of block comments
+@item bmark.el          book marks
+@item bookmark.el       more book marks
+@item c++-tools.el      random tools for c++
+@item c-boxes.el        manipulation of c box comments
+@item c-stuff.el        support for c programming
+@item c-support.el      support for c programing documentation
+@item canrun.el         predicates for what a system can do
+@item cclass.el         crippled clos
+@item classdoc.el       documentation for c++ classes
+@item comm-align.el     aligning comments
+@item complex.el        code complexity metrics
+@item cons.el           c constructors
+@item context.el        saves context from previous editing sessions
+@item convert.el        convert image alchemy .xpm to sun include format
+@item crypt-extra.el    old PGP encryption support
+@item date.el           date functions
+@item date2.el          old date functions
+@item doc.el            support for texi documentation
+@item elprof.el         dms additions for elisp profiling
+@item eltest.el         dms elisp testing facility
+@item enr-add.el        additions to enriched text mode
+@item faceedit.el       edit faces
+@item fcreate.el        implement file creation hooks
+@item functions.el      support for documenting functions in many languages
+@item fundoc.el         extract documentation from source (old)
+@item generic-code.el   generic code mode
+@item header.el         support for file headers
+@item insert-hooks.el   insert hooks in arbitrary functions
+@item instalit.el       implement an instalit mode
+@item makedocs.el       extract documentation (old)
+@item makefile.el       makefile mode
+@item mifmode.el        Frame MIF mode
+@item mk-comp.el        mark compilation mode
+@item modefn.el         mode specific functions
+@item modespec.el       mode specific functions (old)
+@item msvt.el           MS Visual test mode
+@item multi-mode.el     multiple modes in on buffer
+@item nvs-auto.el       autoloads file
+@item nvs-menu.el       menu support
+@item nvs.el            NVS main file
+@item nvscomp.el        NVS compilation file
+@item os2patch.el       patches to OS/2 emacs
+@item par-align.el      align paragraphs
+@item patches.el        random patches
+@item perldb.el         perl database
+@item protos.el         automatic prototyping stuff
+@item rmailssum.el      rmail super summary mode (incomplete)
+@item testsup.el        support for tests in source code
+@item timecard-add.el   additions to timecard mode
+@item whitesp.el        functions for manipulating white spcae
+@item wsearch.el        searching functions
+
+@end itemize
+
+@node Concept Index, Function Index, Appendix, Top
+@unnumbered Concept Index
+
+@printindex cp
+
+@node Function Index, Variable Index, Concept Index, Top
+@unnumbered Function Index
+
+@printindex fn
+
+@node Variable Index,  , Function Index, Top
+@unnumbered Variable Index
+
+@printindex vr
+
+@summarycontents
+@contents
+
+@bye

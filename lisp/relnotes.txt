@@ -1,0 +1,48 @@
+Release Announcement:   NVS elisp 1.9.5
+
+Contents:
+
+Summary
+New Features
+Bug Fixes
+Cosmetic Changes
+Default Changes
+To Do
+Known Bugs
+
+			       Summary
+
+This release of the elisp documentation tools has several new features
+and some bug fixes (yet again).  The new features are not yet
+document.  
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>> New Features <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+o added "align-regexp" package
+
+o added an "idl-mode" and added entry to auto-mode-alist so that it is
+  used for *.idl
+
+o added ispell-comments and ispell-strings.  ispell-comments has
+  problems with languages that use begin and end comment characters
+  (like 'C') because of some oddness (or rather lack of functionality)
+  in emacs syntax understanding.
+
+o Added pure-mode to auto-mode-alist for .plog files.  Pure mode is
+  *not* supplied with this package (get Rick's latest)
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Bug Fixes <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+o No longer changes the kill ring when a file is saved
+
+o no longer internally loads "c-mode", messing up post-19.30 Emacen
+
+o AutoProto no longer chops up #endif
+
+o document-function in c-mode no longer leaves an extra "*/"
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Known Bugs <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+o ispell-comments (see "New Packages")
+
+o pure.el not included

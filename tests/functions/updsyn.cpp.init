@@ -1,0 +1,26 @@
+//////////////////////////////////////////////////////////////////////
+// AddNode() -- Add a node to the list boxXXXPOINTXXX
+// CLASS:    CHierListBox
+// AUTHOR:    Ken Cherenichenko
+// VISIBILITY:     PROTECTED
+// SYNOPSIS
+//
+//   BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/, BOOL fFind/*FALSE*/)
+//
+// DESCRIPTION
+//   |>Description of function<|
+// ARGUMENTS
+//   sTypeOffset (SHORT) --
+//   nIndex (INT) -- index of where to add the node
+// RETURNS
+//   (BOOL) --
+//          TRUE - success
+//          FALSE - invalid index
+// NOTES
+//   |><|
+// CAVEATS AND BUGS
+//   |><|
+
+BOOL CHierListBox::AddNode (SHORT sTypeOffset, INT nIndex /*LB_ERR-5*/,
+			    BOOL fFind/*FALSE*/)
+{

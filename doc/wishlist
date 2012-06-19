@@ -1,0 +1,9 @@
+11/05/96:     * have function synopsis updated when document-function
+	        is run 
+
+Nov 17 1995:  * add document-variable function
+
+Oct 22 1995:  * Perl documentation should handle passing lists (DMS)
+
+
+

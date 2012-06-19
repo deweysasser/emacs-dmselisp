@@ -1,0 +1,22 @@
+/*********************************************************************
+ * foo() -- XXXPOINTXXX
+ * AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+ * VISIBILITY:    PUBLIC | PRIVATE
+ * SYNOPSIS
+ * DESCRIPTION
+ *   |>Description of function<|
+ * ARGUMENTS
+ *   x --
+ *   y --
+ * RETURNS
+ *   (int) -- 
+ * NOTES
+ *   |><|
+ * SEE ALSO
+ *   |><|
+ * CAVEATS AND BUGS
+ *   |><|
+ * FORMAT VERSION:    0.0
+ */
+
+#define foo(x,y) (x<y?x:y)

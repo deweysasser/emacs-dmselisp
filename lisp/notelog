@@ -1,0 +1,17 @@
+Wed Mar 05 12:14:36 1997  Dewey M. Sasser <dewey@newvision.com>
+        * For some reason, can't recompile eltest.el if it's alread
+	loaded.  This needs to be fixed
+
+Wed Mar 05 03:31:49 1997  Dewey M. Sasser <dewey@newvision.com>
+        * elprof.el: master function doesn't work.  Recursion elimination
+	is a bit hard on CLOS.
+
+Thu Oct 28 14:21:10 1993  Dewey M. Sasser (dewey@athena.mit.edu)
+
+	* header.el: find next function summary (in TOC) doesn't work
+	  correctly when in emacs lisp mode.  It finds the synopsis.
+
+	* c-suppor.el: Add a way to skip white space when getting the
+	  next function beginning line.  Also, turn this into a
+	  separate function if it isn't already so that it can be used
+	  for prototyping.

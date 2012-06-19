@@ -1,0 +1,27 @@
+######################################################################
+# perlish() -- XXXPOINTXXX
+# AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+# VISIBILITY:    PUBLIC | PRIVATE
+# SYNOPSIS
+# DESCRIPTION
+#   |>Description of function<|
+# ARGUMENTS
+#   $foo --
+#   $bar --
+# RETURNS
+#   (something perlish) -- 
+# NOTES
+#   |><|
+# SEE ALSO
+#   |><|
+# CAVEATS AND BUGS
+#   |><|
+# FORMAT VERSION:    0.0
+
+sub perlish {
+    local($foo)=$_[0];
+    local($bar)=$_[1];
+
+
+
+}

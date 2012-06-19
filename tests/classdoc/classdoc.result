@@ -1,0 +1,25 @@
+//////////////////////////////////////////////////////////////////////
+// class myclass -- XXXPOINTXXX
+// AUTHOR:    Dewey M. Sasser <dewey@newvision.com>
+// VISIBILITY:    PUBLIC | PRIVATE
+// PUBLIC SUPERCLASSES:    
+// RESPONSIBILITY
+//   |><|
+// COLLABORATORS
+//   |><|
+// DESCRIPTION
+//   |><|
+// CONSTRUCTION
+//   |><|
+// OPERATIONS
+// NOTES
+//   |><|
+// SEE ALSO
+//   |><|
+// CAVEATS AND BUGS
+//   |><|
+// FORMAT VERSION:    0.0
+
+class myclass
+{
+};

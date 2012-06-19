@@ -1,0 +1,14 @@
+package that maintains a cross reference database.
+
+Use Case:
+
+M-x rmailssum [RET] SEMICON
+
+should show a rmail-summary type buffer that allows you to the same functionality as rmail-summary with messges that reference "SEMICON".  
+
+The generator should take a synonym list so that
+"NVS" and "New Vision Systems" are the same thing.
+
+This system should automatically add messages as they come in and are filed, deleted, etc.
+
+It should also allow renaming of a file, manually.

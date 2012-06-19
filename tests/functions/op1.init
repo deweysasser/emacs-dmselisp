@@ -1,0 +1,4 @@
+XXXPOINTXXX
+CString &CIDParser::operator [](int nIndex)
+{
+}

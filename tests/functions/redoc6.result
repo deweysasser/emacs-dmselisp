@@ -1,0 +1,38 @@
+
+//////////////////////////////////////////////////////////////////////
+// FindLock() -- find the appropriate lock given a nameXXXPOINTXXX
+// CLASS:    CLock
+// AUTHOR:    Dewey M. Sasser
+// VISIBILITY:    PROTECTED
+// SYNOPSIS
+// DESCRIPTION
+//   This function returns the lock object associated with csName.
+//   This lock object may be used to voluntarily serialize access any
+//   shared resource that can be named with a string.  The lock does
+//   not have to be destroyed after use.  That will be taken care of
+//   automatically. 
+// ARGUMENTS
+//   csName (const CString &) -- name of the lock to find.
+// RETURNS
+//   (CLock *) -- the associated lock
+// EXCEPTIONS:    NONE
+// NOTES
+//   This is some notes.  It will consist of two paragraphs and
+//   attempt to make sure that they are preserved.
+//   
+//   There should be no extra white space at the end of lines
+// SEE ALSO
+//   This is some cross references.  It will consist of two
+//   paragraphs and attempt to make sure that they are preserved.
+//   
+//   There should be no extra white space at the end of lines
+// CAVEATS AND BUGS
+//   This is some caveats.  It will consist of two paragraphs and
+//   attempt to make sure that they are preserved.
+//   
+//   There should be no extra white space at the end of lines
+//   
+// FORMAT VERSION:    0.0
+
+CLock *CLock::FindLock(const CString &csName)
+{

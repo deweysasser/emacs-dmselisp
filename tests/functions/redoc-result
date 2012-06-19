@@ -1,0 +1,27 @@
+
+
+//////////////////////////////////////////////////////////////////////
+// main() -- 
+// CLASS:    NONE
+// AUTHOR:    Dewey M. Sasser
+// VISIBILITY:    PUBLIC | PRIVATE
+// SYNOPSIS
+// DESCRIPTION
+//   |>Description of function<|
+// ARGUMENTS
+//   argc (int) --
+//   argv (char **) --
+// RETURNS
+//   (int) -- 
+// EXCEPTIONS:    NONE
+// NOTES
+//   |><|
+// SEE ALSO
+//   |><|
+// CAVEATS AND BUGS
+//   |><|
+// FORMAT VERSION:    0.0
+
+int main(int argc, char **argv)
+{
+}

@@ -1,0 +1,8 @@
+XXXPOINTXXX
+sub perlish {
+    local($foo)=$_[0];
+    local($bar)=$_[1];
+
+
+
+}

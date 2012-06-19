@@ -1,0 +1,13 @@
+1) copy the files from the disk to a place on your lisp path
+
+2) Load the file "nvscomp.el" into a buffer, then type "M-x
+   eval-buffer" (or M-x eval-current-buffer in emacs 18.xx) 
+
+   run the command compile-nvs (M-x compile-nvs)
+
+3) put the following line in your .emacs file.  Make sure this line
+   ocurrs AFTER any line which puts the elisp directory on your load
+   path: 
+   (require 'nvs)
+
+Have Fun!

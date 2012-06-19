@@ -1,0 +1,105 @@
+To: nvsdev
+Subject: Emacs documentation tools release
+BCC: dewey
+--text follows this line--
+-----BEGIN PGP SIGNED MESSAGE-----
+
+
+			       Contents
+Major New Features:
+Major Bug Fixes:
+To Do List:
+Know Bugs:
+Availability:
+Manual Corrections and Additions:
+Plans for Next Release:
+
+
+
+This email announces the release of the NVS emacs lisp documentation
+package, version 1.5.
+
+This adds significantly to the functionality of the last relase, as
+well as fixing several bugs.
+
+Major New Features:
+
+	Ability to redocument a function.  If you put the point
+between the function and its documentation header, and call
+document-c-function, comments in all the fields should be preserved.
+Argument comments are based on name, so type can change.
+
+	This version does not put modification author, modification
+date, or update count in the header, so Version Control merging
+collisions should not occurr there.  The table of contents may still
+cause a collision for major changes, but any collisions there can
+simply be deleted, as the table of contents is automatically
+maintained. 
+
+Major Bug Fixes:
+
+	Bug in argument parsing which prevented putting return types
+on a separate line has been fixed.
+
+To Do List:
+
+	Extraction and completion checking tools.  If anyone has any
+features they'd like to see, now is the time.  For example Steve[0]
+mentioned that he would like a tool to point out fields that have not
+yet been filled in.  Dave is prepairing requirements for an output
+format to interface with his MS-Word command reference macros.
+
+	The manual has not been updated, but very little has changed.
+See the section on Manual Corrections and Additions in this document
+for changes.
+
+Know Bugs:
+
+	Keith has reported a bug where the system does not correctly
+handle c++ constructors (which have no return type).  I cannot repeat
+this bug.  If anyone runs accross code where this bug is repeatable,
+please send it to me.
+
+	Redocumentation does not work in c++-mode (more correctly,
+with c++ style comments.)  This bug is best fixed by an archetecture
+change, so that's what I'm doing.  I expect this to be fixed
+tommorrow. 
+
+Availability:
+
+	The library is available on athena in
+/mit/dewey/NVS/elisp.tgz.  Installation instructions accompany the
+archive. 
+
+Manual Corrections and Additions:
+
+	document-c-function now takes an optional prefix argument.
+Its default behavior is to delete the old documentation header.  If
+given a prefix argument, it does not delete the old documentation
+header. 
+
+Plans for Next Release:
+
+	The next release will fix the problems with redocumentation in
+c++.  Look for it soon.  If you're working in c++ now, you may not
+want to install this version.
+
+	The next major release will be made mainly to provide
+documentation extraction tools.  That should be part of this release
+(and be release 2.0) but it was felt that this release should be
+released as soon as possible. 
+
+	Given that the current library is very easy to extend, please
+submit your requests or ideas for emacs tools, as well as extraction
+tools. 
+	
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6.2
+
+iQCVAwUBL9S0p/iDG1rQ3/lBAQHk9AQAi8XdLubRGFN/3+L8WMwhoB50LfJwEsVr
+7mySN95X490nyl6k0hNVJzN6LC748Ew/UeZZfWqhuei0DKcSeEC3EKa2jyjVfasL
+YFesXkoORhvfQx4RX4YhfoUOV9B9jwENuuEgXPCBVTjyNfjvjWcH4F43M/hDIXpC
+LcE55CqwlH8=
+=TGQD
+-----END PGP SIGNATURE-----
