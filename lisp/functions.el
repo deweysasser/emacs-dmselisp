@@ -616,8 +616,8 @@ hash table of args."
 				      key value)))
 
 (defmacro set-list-property (list field key value)
-  (` (setq (, list) (set-list-property-fun (, list) (, field) (, key)
-					   (, value)))))
+  ` (setq , list (set-list-property-fun , list , field , key
+					   , value)))
 
 
 (defun get-property (field key)

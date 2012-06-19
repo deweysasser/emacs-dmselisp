@@ -38,13 +38,13 @@
 (defmacro append-to-list (path &rest values)
   "*Append some values to a path"
   (if values
-      (` (setq (, path) (append (, path) (list ( ,@ values)))))
+      ` (setq , path (append , path (list ,@ values)))
     (error "Appending nothing to path")))
 
 (defmacro prepend-to-list (path &rest vals)
   "*Prepend some values to a path"
   (if vals
-      (` (setq (, path) (append (mapcar 'eval '(, vals)) (, path))))
+      ` (setq , path (append (mapcar 'eval ', vals) , path))
     (error "Prepending nothing to list")))
 
 

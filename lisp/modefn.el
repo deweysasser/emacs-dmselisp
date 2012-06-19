@@ -110,7 +110,7 @@
 (defmacro defmodealias (name mode &rest aliases)
   "*Make a mode specific function have two names.
 NAME MODE [NAME MODE]*"
-  (` (modefn::defmodealias-internal '(, mode) '(, name) '(, aliases))))
+  ` (modefn::defmodealias-internal ', mode ', name ', aliases))
 
 
 (defun modefn::defmodealias-internal (mode1 name1 aliases)
@@ -127,7 +127,7 @@ NAME MODE [NAME MODE]*"
 				"$"
 				(symbol-name name)))
 	(fset (intern real-name2)
-	      (` (lambda (&rest args) (apply '(, (intern real-name1)) args))))
+	      ` (lambda (&rest args) (apply ', (intern real-name1) args)))
 	(modefn::modefn::define-generic-function-conditional mode name nil nil)
 	(setq aliases (cddr aliases))))
     (intern real-name2)))
@@ -136,7 +136,7 @@ NAME MODE [NAME MODE]*"
 (defmacro defmodegeneric (name args &rest body)
   "*defmodegeneric NAME ARGS DOCUMENTATION
 Define a generic mode specialized function"
-  (` (modefn::modefn::define-generic-function-conditional nil '(, name) '(, args) '(, body))))
+  ` (modefn::modefn::define-generic-function-conditional nil ', name ', args ', body))
 
 (defmacro defmodemethod (name mode args &rest body)
   "*args: NAME MODE ARGS &rest BODY
@@ -144,16 +144,16 @@ Define a function that is mode specific.  If MODE is \"default\", the
 function defined is the default if no more specific mode method is
 defined" 
   
-  (` (modefn::define-new-function (, mode) (, name) (, args) (,@ body))))
+  ` (modefn::define-new-function , mode , name , args ,@ body))
 
 
 (defmacro modefn::define-new-function (mode name args &rest body)
   "Define the global function for the defined mode specific function."
-  (`
+  `
    (progn
-     (modefn::modefn::define-generic-function-conditional '(, mode) '(, name)
-       '(, args) '(, body))
-     (modefn::define-mode-specific-function (, mode) (, name) (, args) (,@ body)))))
+     (modefn::modefn::define-generic-function-conditional ', mode ', name
+       ', args ', body)
+     (modefn::define-mode-specific-function , mode , name , args ,@ body)))
 
 (defun modefn::modefn::define-generic-function-conditional (mode name args body)
   (let ((doc (if (stringp (car body))
@@ -181,7 +181,7 @@ defined"
 	  (body (if (stringp (caddr def))
 		    (cdddr def)
 		  (cddr def))))
-      (` (lambda (, args) (, body))))
+      ` (lambda , args , body))
     def))
 
 
@@ -194,17 +194,17 @@ defined"
 	  (sname (symbol-name name)))
       (fset name
 	    (byte-compile-sexp
-	    (` (lambda (&rest args)
-		 (, doc)
+	    ` (lambda (&rest args)
+		 , doc
 		 (let ((fname (intern (concat
 				       (symbol-name major-mode)
 				       "$"
-				       (, sname)))))
+				       , sname))))
 		   (if (fboundp fname)
 		       (apply fname args)
-		     (if (fboundp '(, defaultname))
-			 (apply '(, defaultname) args)
-		       (error "No function %s applicable to mode %s\n" '(, name) major-mode))))))))))
+		     (if (fboundp ', defaultname)
+			 (apply ', defaultname args)
+		       (error "No function %s applicable to mode %s\n" ', name major-mode)))))))))
 
   
 
@@ -226,7 +226,7 @@ defined"
 (defmacro flet-alias (bindings &rest body)
   (let ((real-bindings (mapcar*
 			'(lambda (cell)
-			   `(,(car cell) (&rest args) (apply ',(cadr cell) args)))
+			   `,(car cell) (&rest args) (apply ',(cadr cell) args))
 			bindings)))
   `(flet ,real-bindings
      ,@body)))
@@ -239,10 +239,10 @@ defined"
 	 (default-name (concat "default" "$" (symbol-name name)))
 	 (default-name-sym (intern default-name))
 	 (sym (intern real-name)))
-    (` (defun (, sym)  (, args)
-	 (flet-alias ((call-next-mode-method (, default-name-sym))
-		      (call-default-mode-method (, default-name-sym)))
-		     (,@ body))))))
+    ` (defun , sym  , args
+	 (flet-alias ((call-next-mode-method , default-name-sym)
+		      (call-default-mode-method , default-name-sym))
+		     ,@ body))))
 
 		      
 
@@ -252,13 +252,12 @@ defined"
 			  (symbol-name mode)
 			  "$"
 			  (symbol-name name)))))
-    (`
-     (defun (, newname) (, args)
-      (,@ body)))))
+    `
+     (defun , newname , args
+      ,@ body)))
 
 (defun modefn::autoload-defmodemethod-handler (form file)
   "Return autoload for FORM"
-  (debug)
   (let* ((name (nth 1 form))
 	 (docs (nth 4 form)))
     (unless (stringp docs)

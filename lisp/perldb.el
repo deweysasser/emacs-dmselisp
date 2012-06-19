@@ -78,14 +78,14 @@
 
 (defmacro def-perldb (name key &optional doc)
   (let* ((fun (intern (concat "perldb-" name))))
-    (` (progn
-	 (defun (, fun) (arg)
-	   (, (or doc ""))
+    ` (progn
+	 (defun , fun (arg)
+	   , (or doc "")
 	   (interactive "p")
 	   (perldb-call (if (not (= 1 arg))
-			    (concat (, name) arg)
-			  (, name))))
-	 (define-key perldb-mode-map (, key) (quote (, fun)))))))
+			    (concat , name arg)
+			  , name)))
+	 (define-key perldb-mode-map , key (quote , fun)))))
 
 (def-perldb "s"   "\M-s" "Step one source line with display")
 (def-perldb "n"   "\M-n" "Step one source line (skip functions)")

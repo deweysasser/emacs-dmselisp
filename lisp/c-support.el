@@ -704,11 +704,11 @@ current buffer."
 ;;;###autoload
 (defun make-insert-return-values-function (prefix)
   "Make a lambda expression that inserts it's arg, prefixed by PREFIX"
-  (` (lambda (arg)
-       (insert "\n" (, prefix) (car arg) " - "
+  ` (lambda (arg)
+       (insert "\n" , prefix (car arg) " - "
 	       (if (cdr arg)
 		   (cdr arg)
-		 "")))))
+		 ""))))
 
 ;;;###autoload
 (defun find-insert-exceptions ()

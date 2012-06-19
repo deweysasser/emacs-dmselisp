@@ -407,7 +407,7 @@ return it, otherwise create a new readtable object."
 
 
 (defmacro reader::get-readtable-entry (char readtable)
-  (` (aref (, readtable) (, char))))
+  ` (aref , readtable , char))
    
 (defun set-macro-character 
   (char function &optional readtable)
@@ -521,7 +521,7 @@ Returns nil if there is no such function."
   ;; Called to return a sexp starting at POINT.  BODY creates the sexp result
   ;; and should leave point after the sexp.  The body is wrapped in
   ;; a lambda expression and passed to reader::read-sexp-func.
-  (` (reader::read-sexp-func (, point) (function (lambda () (,@ body))))))
+  ` (reader::read-sexp-func , point (function (lambda () ,@ body))))
 
 (put 'reader::read-sexp 'edebug-form-spec '(form body))
 (put 'reader::read-sexp 'lisp-indent-function 2)
@@ -550,7 +550,7 @@ Returns nil if there is no such function."
   ;; In both cases, `before-read-hook' and `after-read-hook' are
   ;; called before and after executing READER-CALL.
   ;; Are there any other uses for these hooks?  Edebug doesn't need them.
-  (` (prog2
+  ` (prog2
 	 (run-hooks 'before-read-hook)
 	 ;; this catch allows to ignore the return, in the case that
 	 ;; reader::read-from-buffer should continue looping (e.g.
@@ -560,12 +560,12 @@ Returns nil if there is no such function."
 	   ;; go outside 
 	   (return 
 	    (prog1 
-		(, reader-call)
+		, reader-call
 	      ;; this occurence of the after hook fires if the 
 	      ;; reader-call returns normally ...
 	      (run-hooks 'after-read-hook))))
        ;; ... and that one if  it was thrown to the tag 'reader-ignore
-       (run-hooks 'after-read-hook))))
+       (run-hooks 'after-read-hook)))
 
 (put 'reader::encapsulate-recursive-call 'edebug-form-spec '(form))
 (put 'reader::encapsulate-recursive-call 'lisp-indent-function 0)
@@ -817,10 +817,10 @@ Returns nil if there is no such function."
    (lambda (stream char)
      (if (= (following-char) ?\ )
 	 ;; old backquote syntax. This is ambigous, because 
-	 ;; (`(sexp)) is a valid form in both syntaxes, but 
+	 ;; `(sexp) is a valid form in both syntaxes, but 
 	 ;; unfortunately not the same. 
-	 ;; old syntax: read -> (` (sexp))
-	 ;; new syntax: read -> ((` (sexp)))
+	 ;; old syntax: read -> ` (sexp)
+	 ;; new syntax: read -> (` (sexp))
 	 (reader::read-sexp (1- (point)) '\`)
        (reader::read-sexp (1- (point))
 	 (list (reader::read-sexp (point) '\`)
@@ -849,9 +849,9 @@ Returns nil if there is no such function."
 
 ;; 'a
 ;; '(a b c)
-;; (let ((a 10) (b '(20 30))) `(,a ,@b c))
+;; (let ((a 10) (b '(20 30))) `,a ,@b c)
 ;; the old syntax is also supported:
-;; (let ((a 10) (b '(20 30))) (` ((, a) (,@ b) c)))
+;; (let ((a 10) (b '(20 30))) ` (, a ,@ b c))
 
 ;; Single line character comment:  ; 
 (set-macro-character ?\;

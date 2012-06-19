@@ -28,34 +28,34 @@
 (defmacro in-buffer (theBuf &rest body)
   "Execute execute in THEBUF forms BODY
 THEBUF must be a buffer or the name of an existing buffer"
-  (` (let ((buf (current-buffer))
-	   (new-buf (, theBuf)))
+  ` (let ((buf (current-buffer))
+	   (new-buf , theBuf))
     (set-buffer new-buf)
 ;;    (set-window-buffer (selected-window) (current-buffer))
     (unwind-protect
-	(progn (,@ body))
+	(progn ,@ body)
       (set-buffer buf)
 ;;      (set-window-buffer (selected-window) (current-buffer))
-      ))))
+      )))
 
 (put 'in-buffer 'lisp-indent-function 1)
 
 
 ;;;###autoload
 (defmacro in-temp-buffer (&rest body)
-  (` (let ((buf (current-buffer))
+  ` (let ((buf (current-buffer))
 	(new-buf (generate-new-buffer " *temp* (in-temp-buffer)")))
     (set-buffer new-buf)
 ;;    (set-window-buffer (selected-window) (current-buffer))
     (unwind-protect
-	(progn (,@ body))
+	(progn ,@ body)
       (set-buffer buf)
 ;;      (set-window-buffer (selected-window) (current-buffer))
-      (kill-buffer new-buf)))))
+      (kill-buffer new-buf))))
 
 ;;;###autoload
 (defmacro in-temp-buffer-same-mode (&rest body)
-  (` (let (ret-val
+  ` (let (ret-val
 	   (buf (current-buffer))
 	   (mode major-mode)
 	   new-buf)
@@ -65,11 +65,11 @@ THEBUF must be a buffer or the name of an existing buffer"
 	   (set-buffer new-buf)
 ;;	   (set-window-buffer (selected-window) (current-buffer))
 	   (funcall mode)
-	   (setq ret-val (progn (,@ body))))
+	   (setq ret-val (progn ,@ body)))
 	 (set-buffer buf)
 ;;	 (set-window-buffer (selected-window) (current-buffer))
 	 (kill-buffer new-buf))
-       ret-val)))
+       ret-val))
 
 
 ;;;###autoload
