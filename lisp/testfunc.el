@@ -546,6 +546,7 @@
   "Read test series from file.  This function temporarily redefines
   the execution and viewing functions to be non operative"
   (flet ((noop (arg)))
+    ;; TODO:  Must rewrite this.  flet-alias no longer exists
     (flet-alias
      ((do-test-series noop)
       (view-series-results noop)

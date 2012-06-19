@@ -28,7 +28,6 @@
 ;;   (defvar eltest::creation-functions '((eltest . create-eltest)
 ;;   (defvar eltest::error nil
 ;;   (defun eltest::define-error-symbol (symbol description &rest keys)
-;;   (defmacro flet-alias (bindings &rest body)
 ;;   (defmacro defTest (tag &rest args)
 ;;   (defun* eltest::create-test (&rest args
 ;;   (defun* make-eltest (test-type &key parent tag name test directory
@@ -209,15 +208,6 @@
       (put symbol 'error-conditions (list 'error 'eltest::error keys symbol ))
     (put symbol 'error-conditions (list 'error 'eltest::error symbol )))
   (put symbol 'error-message description))
-
-(defmacro flet-alias (bindings &rest body)
-  (let ((real-bindings (mapcar*
-			'(lambda (cell)
-			   `(,(car cell) (&rest args) (apply ',(cadr cell) args)))
-			bindings)))
-  `(flet ,real-bindings
-     ,@body)))
-
 
 ;;; Error symbols
 
@@ -646,6 +636,7 @@
   (if (listp file-or-files)
       (mapc 'eltest::snarf-from-file file-or-files)
     (flet ((noop (arg)))
+      ;; TODO:  Must re-write this.  flet-alias no longer exists.
       (flet-alias
        ((do-and-view-test noop))
        (load-file file-or-files)))))

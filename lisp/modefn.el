@@ -223,26 +223,16 @@ defined"
     (fset (intern real-name)
 	  fundef)))
 
-(defmacro flet-alias (bindings &rest body)
-  (let ((real-bindings (mapcar*
-			'(lambda (cell)
-			   `,(car cell) (&rest args) (apply ',(cadr cell) args))
-			bindings)))
-  `(flet ,real-bindings
-     ,@body)))
-
-
-
 (defmacro modefn::define-mode-specific-function (mode name args &rest body)
   "Just that"
   (let* ((real-name (concat (symbol-name mode) "$" (symbol-name name)))
 	 (default-name (concat "default" "$" (symbol-name name)))
 	 (default-name-sym (intern default-name))
 	 (sym (intern real-name)))
-    ` (defun , sym  , args
-	 (flet-alias ((call-next-mode-method , default-name-sym)
-		      (call-default-mode-method , default-name-sym))
-		     ,@ body))))
+    `(defun ,sym  ,args
+       (flet ((call-next-mode-method nil (apply ',default-name-sym ,args))
+              (call-default-mode-method (apply ',default-name-sym ,args)))
+         ,@ body))))
 
 		      
 

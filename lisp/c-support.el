@@ -4,9 +4,9 @@
 ;; Portions Copyright (c) 1996, Dewey M. Sasser
 ;; Author          : Lynn Slater
 ;; Created On      : Tue Aug  8 12:26:17 1989
-;; Last Modified By: Dewey M. Sasser <dsasser@cerulean.com>
-;; Last Modified On: Tue May 30 21:32:57 2000
-;; Update Count    : 244
+;; Last Modified By: Dewey M. Sasser <dewey@sasser.com>
+;; Last Modified On: Tue Jun 19 13:05:56 2012
+;; Update Count    : 245
 ;; Status          : Alpha released
 ;;
 ;;
